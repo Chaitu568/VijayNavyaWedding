@@ -88,9 +88,16 @@ h1, h2, h3, .serif { font-family: "Playfair Display", "Cormorant Garamond", Geor
   background:
     var(--mandala-soft) center -140px / 260px no-repeat,
     rgba(251, 244, 220, 0.97);
-  padding: 116px 26px 38px;
+  padding: 140px 26px 38px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
   transition: transform 0.9s ease;
+}
+
+/* ---------- Thoranam (mango-leaf garland over the cover) ---------- */
+.thoranam {
+  position: absolute; top: 0; left: 0; right: 0; height: 58px; z-index: 3;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 58'%3E%3Cpath d='M0 2 Q42 16 84 2' fill='none' stroke='%237a5a21' stroke-width='1.6'/%3E%3Cg transform='translate(14 9)'%3E%3Cpath d='M0 0 C5 8 7 20 0 36 C-7 20 -5 8 0 0Z' fill='%232f7a33' transform='rotate(-26)'/%3E%3Cpath d='M0 0 C5 8 7 20 0 36 C-7 20 -5 8 0 0Z' fill='%233f9e46'/%3E%3Cpath d='M0 0 C5 8 7 20 0 36 C-7 20 -5 8 0 0Z' fill='%23256b2b' transform='rotate(26)'/%3E%3C/g%3E%3Cg transform='translate(42 12)'%3E%3Cpath d='M0 0 C5 8 7 20 0 36 C-7 20 -5 8 0 0Z' fill='%23256b2b' transform='rotate(-26)'/%3E%3Cpath d='M0 0 C5 8 7 20 0 36 C-7 20 -5 8 0 0Z' fill='%232f7a33'/%3E%3Cpath d='M0 0 C5 8 7 20 0 36 C-7 20 -5 8 0 0Z' fill='%233f9e46' transform='rotate(26)'/%3E%3C/g%3E%3Cg transform='translate(70 9)'%3E%3Cpath d='M0 0 C5 8 7 20 0 36 C-7 20 -5 8 0 0Z' fill='%233f9e46' transform='rotate(-26)'/%3E%3Cpath d='M0 0 C5 8 7 20 0 36 C-7 20 -5 8 0 0Z' fill='%23256b2b'/%3E%3Cpath d='M0 0 C5 8 7 20 0 36 C-7 20 -5 8 0 0Z' fill='%232f7a33' transform='rotate(26)'/%3E%3C/g%3E%3Ccircle cx='28' cy='13' r='3' fill='%23e8912d'/%3E%3Ccircle cx='28' cy='13' r='1.3' fill='%23f6b93b'/%3E%3Ccircle cx='56' cy='13' r='3' fill='%23e8912d'/%3E%3Ccircle cx='56' cy='13' r='1.3' fill='%23f6b93b'/%3E%3C/svg%3E") repeat-x top center / auto 58px;
 }
 
 /* ---------- Envelope opening ---------- */
@@ -101,9 +108,15 @@ h1, h2, h3, .serif { font-family: "Playfair Display", "Cormorant Garamond", Geor
   border: 2px solid var(--gold); border-radius: 10px;
 }
 .env-flap {
-  position: absolute; top: 0; left: 0; right: 0; height: 96px; z-index: 3;
+  position: absolute; top: 0; left: 0; right: 0; height: 120px; z-index: 3;
   transform-origin: top center; transform-style: preserve-3d;
   transition: transform 0.85s cubic-bezier(0.6, 0.05, 0.3, 1);
+}
+.flap-ganesh {
+  position: absolute; top: 12px; left: 50%; z-index: 1;
+  transform: translateX(-50%);
+  height: 56px; width: auto;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
 }
 .flap-face {
   position: absolute; inset: 0;
@@ -112,8 +125,10 @@ h1, h2, h3, .serif { font-family: "Playfair Display", "Cormorant Garamond", Geor
 }
 .flap-front {
   background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M3 3 H97 L50 94 Z' fill='none' stroke='%23C9A24B' stroke-width='1.2'/%3E%3C/svg%3E") center / 100% 100% no-repeat,
     var(--mandala) center -118px / 190px no-repeat,
     linear-gradient(180deg, #8a1c2e, #6d1220);
+  filter: drop-shadow(0 5px 6px rgba(74, 10, 22, 0.35));
 }
 .flap-back {
   transform: rotateX(180deg);
@@ -121,7 +136,7 @@ h1, h2, h3, .serif { font-family: "Playfair Display", "Cormorant Garamond", Geor
 }
 #cover.opening .env-flap { transform: rotateX(180deg); }
 .flap-seal {
-  position: absolute; top: 68px; left: 50%; z-index: 4;
+  position: absolute; top: 92px; left: 50%; z-index: 4;
   transform: translateX(-50%);
   width: 46px; height: 46px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -399,14 +414,22 @@ footer {
   color: #f3e7d3; text-align: center; padding: 52px 22px 46px;
   border-top: 1.5px solid var(--gold);
 }
-footer .rama-img {
-  width: 215px; max-width: 72%; border-radius: 10px; display: block; margin: 0 auto;
-  border: 2px solid var(--gold); outline: 1px solid var(--gold-pale); outline-offset: 5px;
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4);
+/* Full-width Rama–Sita wedding banner, stretched edge to edge */
+.rama-banner { position: relative; margin: -52px -22px 30px; }
+.rama-banner .rama-img {
+  width: 100%; max-width: none; height: clamp(220px, 34vw, 420px); display: block;
+  object-fit: cover; object-position: center 35%;
+  border: none; outline: none; border-radius: 0; box-shadow: none; margin: 0;
 }
-footer .rama-caption {
-  margin-top: 16px; font-family: "Playfair Display", serif; font-size: 0.95rem;
+.rama-banner .rama-caption {
+  position: absolute; left: 0; right: 0; bottom: 0; margin: 0;
+  padding: 34px 16px 13px; text-align: center;
+  font-family: "Playfair Display", serif; font-size: 0.95rem;
   letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold-pale);
+  background: linear-gradient(180deg, rgba(58, 8, 20, 0), rgba(58, 8, 20, 0.85));
+}
+@media (max-width: 600px) {
+  .rama-banner .rama-img { height: 235px; object-position: center 30%; }
 }
 footer .names { font-family: "Great Vibes", cursive; font-size: 2.3rem; line-height: 1.35; color: var(--gold-pale); margin: 14px 0 6px; text-shadow: 0 0 14px rgba(74,10,22,0.9), 0 0 30px rgba(74,10,22,0.75); }
 footer .blessing { font-style: italic; opacity: 0.9; margin-bottom: 14px; }
