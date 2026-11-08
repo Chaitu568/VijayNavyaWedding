@@ -48,6 +48,14 @@ font-weight:700;letter-spacing:.14em;font-size:2.1cqw;padding:1.4cqw 4.2cqw;bord
 border:1px solid var(--gold);transition:transform .15s,background .15s;cursor:pointer;
 }
 .btn:hover{background:#15302a;transform:translateY(-1px)}
+.events li{border-top:1px dotted rgba(166,90,67,.55)}
+.ev-grid{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:.6cqw;text-align:left}
+.ev-grid .c{display:flex;gap:.9cqw;align-items:center;padding:0 .9cqw;border-left:1px solid rgba(166,90,67,.45);color:#4a3a14;text-decoration:none}
+.ev-grid .c:first-child{border-left:0;padding-left:0}
+.ev-grid svg{width:3.9cqw;height:3.9cqw;flex:none;stroke:#a65a43;fill:none;stroke-width:1.5}
+.ev-grid b{display:block;font-size:1.85cqw;color:#a65a43;letter-spacing:.04em}
+.ev-grid span{display:block;font-size:1.95cqw;line-height:1.25}
+a.c:hover span{text-decoration:underline}
 .maplink{display:inline-block;font-size:1.7cqw;color:#6b4d0e;text-decoration:underline;margin-top:.3cqw}
 .venues{margin-top:26px}
 .venues h4{font-family:'Playfair Display',serif;font-size:19px;margin:0 0 10px;color:var(--deep)}
@@ -171,9 +179,14 @@ venue:'4253 County Rd 412, McKinney, TX 75071', desc:'Wedding ceremony. Muhurtha
 const $ = s => document.querySelector(s);
 const mapUrl = e => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(e.venue);
 // invitation list on page 1
-$('#inviteEvents').innerHTML = EVENTS.map(e =>
-`<li><p class="ev-name">${e.short}</p><p class="ev-meta">${e.when}${e.venue.includes('County Rd') ? '<br>' + e.venue.replace(', McKinney, TX 75071','') : ''}</p><a class="maplink" href="${mapUrl(e)}" target="_blank" rel="noopener">\uD83D\uDCCD Location</a></li>`
-).join('');
+const IC = {
+cal:'<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17.2h.01M12 17.2h.01"/></svg>',
+clk:'<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M12 6.8V12l3.4 2.2"/></svg>',
+pin:'<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.8-6.1-6.8-11.2a6.8 6.8 0 0 1 13.6 0C18.8 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.4"/></svg>'};
+$('#inviteEvents').innerHTML = EVENTS.map(e => {
+const p = e.when.split(' \u00b7 '), loc = e.venue.includes('County Rd') ? e.venue.split(',')[0] : e.venue;
+return `<li><p class="ev-name">${e.short}</p><div class="ev-grid"><div class="c">${IC.cal}<div><b>Date</b><span>${p[0]}</span></div></div><div class="c">${IC.clk}<div><b>Time</b><span>${p[1]}</span></div></div><a class="c" href="${mapUrl(e)}" target="_blank" rel="noopener">${IC.pin}<div><b>Location</b><span>${loc}</span></div></a></div></li>`;
+}).join('');
 // event checkboxes on page 2
 $('#eventChecks').innerHTML = EVENTS.map(e =>
 `<div class="evrow"><div><b>${e.short}</b><small>${e.when} &middot; <a href="${mapUrl(e)}" target="_blank" rel="noopener">\uD83D\uDCCD Map</a></small></div><div class="att"><em>Attending</em><label><input type="radio" name="att_${e.id}" value="yes"><span>Yes</span></label><label><input type="radio" name="att_${e.id}" value="no"><span>No</span></label></div></div>`
