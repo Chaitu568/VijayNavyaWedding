@@ -260,7 +260,7 @@ section.alt { background: var(--paper); }
 .sound-btn svg { width: 27px; height: 27px; display: block; }
 .sound-btn .slash { display: none; }
 .sound-btn.muted .slash { display: block; }
-.sound-btn.muted { opacity: 0.88; }
+.sound-btn.muted { opacity: 0.55; filter: grayscale(0.75); }
 .sound-btn:not(.muted) svg { animation: drumbeat 1.6s ease-in-out infinite; transform-origin: 50% 50%; }
 @keyframes drumbeat { 0%, 100% { transform: rotate(-3.5deg); } 50% { transform: rotate(3.5deg); } }
 .sound-btn:active { transform: scale(0.94); }
