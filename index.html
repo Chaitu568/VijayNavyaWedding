@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="page-title">Wedding Invitation</title>
-  <meta name="description" content="Join us as we celebrate our wedding — RSVP and share your wishes." />
+  <meta name="description" content="Join us as we celebrate our wedding — view the celebrations and RSVP." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -41,7 +41,6 @@
         <a href="#couple">Couple</a>
         <a href="#journey">Events</a>
         <a href="#rsvp">RSVP</a>
-        <a href="#wishes">Wishes</a>
       </div>
     </div>
   </nav>
@@ -138,33 +137,16 @@
           <input type="tel" id="r-phone" name="phone" required autocomplete="tel" placeholder="+91 …" />
         </div>
         <div class="field">
-          <label>Wedding ceremony?</label>
-          <div class="radio-row">
-            <label class="radio-pill"><input type="radio" name="ceremony" value="yes" checked /><span>Joyfully attending</span></label>
-            <label class="radio-pill"><input type="radio" name="ceremony" value="no" /><span>Will miss it</span></label>
-          </div>
+          <label>Will you be joining us?</label>
+          <div id="rsvp-events"></div>
         </div>
-        <div class="field">
-          <label>Reception?</label>
-          <div class="radio-row">
-            <label class="radio-pill"><input type="radio" name="reception" value="yes" checked /><span>Joyfully attending</span></label>
-            <label class="radio-pill"><input type="radio" name="reception" value="no" /><span>Will miss it</span></label>
-          </div>
-        </div>
-        <div class="field">
+        <div class="field narrow-field">
           <label for="r-headcount">Total guests (including you)</label>
           <input type="number" id="r-headcount" name="headcount" min="1" max="20" value="1" />
         </div>
         <div class="field">
-          <label>Meal preference</label>
-          <div class="radio-row">
-            <label class="radio-pill"><input type="radio" name="meal" value="veg" checked /><span>Veg</span></label>
-            <label class="radio-pill"><input type="radio" name="meal" value="non-veg" /><span>Non-veg</span></label>
-          </div>
-        </div>
-        <div class="field">
-          <label for="r-notes">Dietary notes / message <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
-          <textarea id="r-notes" name="notes" placeholder="Allergies, or a note for the couple…"></textarea>
+          <label for="r-notes">Note for the couple <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
+          <textarea id="r-notes" name="notes" rows="2" placeholder="Anything we should know…"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" id="rsvp-submit" style="width:100%">Send RSVP</button>
         <div class="form-note">Your response is saved instantly and shared only with the families.</div>
@@ -176,35 +158,10 @@
     </div>
   </section>
 
-  <!-- ============ WISHES ============ -->
-  <section id="wishes" class="photo-band">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <h2>Wall of Wishes</h2>
-        <p>Leave a blessing for the couple</p>
-      </div>
-      <form id="wish-form" class="card reveal" style="margin-bottom:26px" novalidate>
-        <div class="field">
-          <label for="w-name">Your name *</label>
-          <input type="text" id="w-name" required placeholder="e.g. Priya Nair" />
-        </div>
-        <div class="field">
-          <label for="w-msg">Your wish *</label>
-          <textarea id="w-msg" required placeholder="Write your blessing…"></textarea>
-        </div>
-        <button type="submit" class="btn btn-ghost" id="wish-submit" style="width:100%">Share Wish</button>
-        <div class="form-note">Wishes appear here after a quick review by the family.</div>
-        <div class="form-ok" id="wish-ok">
-          <h3>Thank you! ♡</h3>
-          <p>Your wish was received and will appear after review.</p>
-        </div>
-      </form>
-      <div id="wishes-list"></div>
-    </div>
-  </section>
-
   <footer>
     <div class="wrap">
+      <img class="rama-img" src="assets/rama-sita.jpg" alt="Lord Sri Rama and Goddess Sita" loading="lazy" />
+      <div class="rama-caption">With the divine blessings of Sri Rama &amp; Sita</div>
       <div class="names"><span id="foot-groom">Vijay</span> <span style="color:var(--gold-soft)">&amp;</span> <span id="foot-bride">Navya</span></div>
       <div class="blessing" id="foot-blessing"></div>
       <div id="foot-contact" style="font-size:0.9rem; opacity:0.85"></div>
@@ -212,7 +169,7 @@
   </footer>
 
   <!-- Floating sound toggle (appears only when WEDDING.musicUrl is set) -->
-  <button id="sound-toggle" class="sound-btn" style="display:none" aria-label="Toggle music">🔇</button>
+  <button id="sound-toggle" class="sound-btn muted" style="display:none" aria-label="Toggle music"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="24" cy="9.5" rx="12.5" ry="4.2"/><path d="M11.5 9.5v29c0 2.3 5.6 4.2 12.5 4.2 6.9 0 12.5-1.9 12.5-4.2v-29"/><path d="M14 16l10 8.5L34 16M14 32l10-7.5L34 32"/><line class="slash" x1="9" y1="39" x2="39" y2="9"/></svg></button>
 
   <script src="js/content.js"></script>
   <script src="js/config.js"></script>
