@@ -121,9 +121,7 @@
       document.body.classList.remove("locked");
       // Music starts on this tap (browsers block autoplay before interaction)
       if (audio && audio.paused) {
-        audio.play().then(function () {
-          document.getElementById("sound-toggle").classList.remove("muted");
-        }).catch(function () { /* music file missing — stay silent */ });
+        audio.play().catch(function () { /* music unavailable — stay silent */ });
       }
       window.scrollTo(0, 0);
     });
@@ -180,13 +178,13 @@
     audio.preload = "none";
     var btn = document.getElementById("sound-toggle");
     btn.style.display = "";
+    // Icon state follows the audio element's real state, not click bookkeeping
+    audio.addEventListener("play", function () { btn.classList.remove("muted"); });
+    audio.addEventListener("pause", function () { btn.classList.add("muted"); });
+    audio.addEventListener("error", function () { btn.classList.add("muted"); });
     btn.addEventListener("click", function () {
-      if (audio.paused) {
-        audio.play().then(function () { btn.classList.remove("muted"); }).catch(function () {});
-      } else {
-        audio.pause();
-        btn.classList.add("muted");
-      }
+      if (audio.paused) audio.play().catch(function () {});
+      else audio.pause();
     });
   }
 
@@ -202,6 +200,13 @@
     el.addEventListener("input", function h() { el.style.borderColor = ""; el.removeEventListener("input", h); });
   }
 
+  function rsvpStatus(msg) {
+    var s = document.getElementById("rsvp-status");
+    if (!s) return;
+    s.textContent = msg;
+    s.classList.add("show");
+  }
+
   function bindRsvp() {
     var form = document.getElementById("rsvp-form");
     form.addEventListener("submit", function (ev) {
@@ -209,7 +214,7 @@
       var name = val("r-name").trim(), phone = val("r-phone").trim();
       if (!name) return nudge("r-name", "Please tell us your name.");
       if (!/^[+\d][\d\s\-()]{6,18}$/.test(phone)) return nudge("r-phone", "Please enter a valid phone number.");
-      if (!db) return alert("RSVP is not connected yet — please try again later.");
+      if (!db) return rsvpStatus("Online RSVP isn't switched on yet — please check back soon, or reach us at the email below.");
 
       var btn = document.getElementById("rsvp-submit");
       btn.disabled = true; btn.textContent = "Sending…";
@@ -225,9 +230,12 @@
         message: val("r-notes").trim() || null,
       }).then(function (res) {
         btn.disabled = false; btn.textContent = "Send RSVP";
-        if (res.error) { alert("Something went wrong saving your RSVP. Please try again."); return; }
+        if (res.error) { rsvpStatus("Something went wrong saving your RSVP — please try again."); return; }
         form.querySelectorAll(".field, #rsvp-submit, .form-note").forEach(function (el) { el.style.display = "none"; });
         document.getElementById("rsvp-ok").classList.add("show");
+      }).catch(function () {
+        btn.disabled = false; btn.textContent = "Send RSVP";
+        rsvpStatus("Something went wrong saving your RSVP — please try again.");
       });
     });
   }
