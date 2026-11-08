@@ -7,7 +7,7 @@
   <meta name="description" content="Join us as we celebrate our wedding — RSVP and share your wishes." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -54,12 +54,6 @@
       <div class="dateline" id="hero-date"></div>
       <div class="tagline" id="hero-tagline"></div>
       <div class="divider">✦</div>
-      <div class="countdown" id="countdown">
-        <div class="count-box"><b id="cd-days">–</b><span>Days</span></div>
-        <div class="count-box"><b id="cd-hours">–</b><span>Hours</span></div>
-        <div class="count-box"><b id="cd-mins">–</b><span>Minutes</span></div>
-        <div class="count-box"><b id="cd-secs">–</b><span>Seconds</span></div>
-      </div>
       <div class="btn-row">
         <a href="#rsvp" class="btn btn-primary">RSVP Now</a>
         <a href="#journey" class="btn btn-ghost">View Events</a>
@@ -68,7 +62,7 @@
   </header>
 
   <!-- ============ THE COUPLE ============ -->
-  <section id="couple">
+  <section id="couple" class="lattice framed">
     <div class="wrap">
       <div class="sec-head reveal">
         <h2>The Couple</h2>
@@ -92,8 +86,21 @@
     </div>
   </section>
 
+  <!-- ============ COUNTDOWN ============ -->
+  <section class="temple-band" id="countdown-sec">
+    <div class="cd-head">The Auspicious Hour Approaches</div>
+    <div class="band-body">
+      <div class="countdown" id="countdown">
+        <div class="count-box"><b id="cd-days">–</b><span>Days</span></div>
+        <div class="count-box"><b id="cd-hours">–</b><span>Hours</span></div>
+        <div class="count-box"><b id="cd-mins">–</b><span>Minutes</span></div>
+        <div class="count-box"><b id="cd-secs">–</b><span>Seconds</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ WEDDING JOURNEY ============ -->
-  <section id="journey" class="alt">
+  <section id="journey" class="lattice framed">
     <div class="wrap">
       <div class="sec-head reveal">
         <h2>The Wedding Journey</h2>
@@ -104,8 +111,8 @@
   </section>
 
   <!-- ============ VIDEO ============ -->
-  <section id="video" class="alt" style="display:none">
-    <div class="wrap">
+  <section id="video" class="temple-band" style="display:none">
+    <div class="wrap band-body">
       <div class="sec-head reveal">
         <h2>Watch</h2>
         <p>Our invitation film</p>
@@ -115,7 +122,7 @@
   </section>
 
   <!-- ============ RSVP ============ -->
-  <section id="rsvp" class="alt">
+  <section id="rsvp" class="lattice framed">
     <div class="wrap">
       <div class="sec-head reveal">
         <h2>Bless Us With Your Presence</h2>
@@ -170,7 +177,7 @@
   </section>
 
   <!-- ============ WISHES ============ -->
-  <section id="wishes">
+  <section id="wishes" class="photo-band">
     <div class="wrap">
       <div class="sec-head reveal">
         <h2>Wall of Wishes</h2>
