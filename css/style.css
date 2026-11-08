@@ -113,9 +113,13 @@ h1, h2, h3, .serif { font-family: "Playfair Display", "Cormorant Garamond", Geor
   transition: transform 0.85s cubic-bezier(0.6, 0.05, 0.3, 1);
 }
 .flap-ganesh {
-  position: absolute; top: 10px; left: 50%; z-index: 1;
+  position: absolute; top: 6px; left: 50%; z-index: 1;
   transform: translateX(-50%);
-  height: 64px; width: auto;
+  height: 74px; width: 74px; object-fit: contain;
+  padding: 8px; border-radius: 50%;
+  background: radial-gradient(circle, #4a0a16 58%, #5d1120 100%);
+  border: 2px solid var(--gold);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(201, 162, 75, 0.35);
   backface-visibility: hidden; -webkit-backface-visibility: hidden;
 }
 .flap-face {
@@ -126,7 +130,6 @@ h1, h2, h3, .serif { font-family: "Playfair Display", "Cormorant Garamond", Geor
 .flap-front {
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M3 3 H97 L50 94 Z' fill='none' stroke='%23C9A24B' stroke-width='1.2'/%3E%3C/svg%3E") center / 100% 100% no-repeat,
-    var(--mandala) center -118px / 190px no-repeat,
     linear-gradient(180deg, #8a1c2e, #6d1220);
   filter: drop-shadow(0 5px 6px rgba(74, 10, 22, 0.35));
 }
