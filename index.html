@@ -118,6 +118,12 @@ h2{font-size:clamp(28px,2.8vw,40px);margin-bottom:14px}
 html{scroll-padding-top:54px}
 body{padding-top:54px}
 @media (min-width:1000px){.hero{top:54px;height:calc(100vh - 54px)}.invite{height:min(100vh - 86px,(44vw - 32px) * 1.4953)}.rsvp{min-height:calc(100vh - 54px)}}
+.gift{margin:28px auto 0;max-width:560px;background:var(--card);border:1px solid #e6d6a8;border-radius:18px;padding:26px 22px;text-align:center}
+.gift h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;color:var(--deep);margin:0 0 6px}
+.gift p{margin:0 0 16px;color:#5d7268;font-size:14px;line-height:1.5}
+.gift select{width:100%;max-width:340px;padding:12px 14px;border:1px solid var(--gold);border-radius:99px;background:#fff;color:var(--deep);font:600 14px inherit;font-family:inherit;text-align:center;cursor:pointer}
+.gift .gbtn{display:inline-block;margin-top:16px;background:var(--deep);color:#fff;text-decoration:none;font-weight:700;letter-spacing:.12em;font-size:13px;padding:12px 28px;border-radius:99px;border:1px solid var(--gold)}
+.gift .gbtn:hover{background:#15302a}
 </style>
 </head>
 <body>
@@ -164,6 +170,17 @@ body{padding-top:54px}
 <p id="thanksText"></p>
 <div class="cal" id="calList"></div>
 </div>
+<div class="gift" id="gifts">
+<h3>Find the perfect gift</h3>
+<p>Your presence is the greatest gift. If you would like to give something, a gift card is always welcome.</p>
+<select id="giftSel" aria-label="Choose a gift card">
+<option value="https://www.amazon.com/gift-cards">Amazon Gift Card</option>
+<option value="https://www.target.com/c/gift-cards">Target Gift Card</option>
+<option value="https://www.walmart.com/cp/gift-cards/96894">Walmart Gift Card</option>
+<option value="https://www.giftcards.com/">Visa / Other Gift Cards</option>
+</select><br>
+<a class="gbtn" id="giftBtn" href="https://www.amazon.com/gift-cards" target="_blank" rel="noopener">BUY GIFT CARD</a>
+<script>document.getElementById('giftSel').addEventListener('change',function(){document.getElementById('giftBtn').href=this.value})</script>
 </div>
 </div>
 </section>
