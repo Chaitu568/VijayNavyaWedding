@@ -90,6 +90,18 @@ textarea{min-height:110px;resize:vertical}
 .grid2{grid-template-columns:1fr}
 .card{padding:24px}
 }
+@media (min-width:1000px){
+body{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:start}
+.hero{position:sticky;top:0;height:100vh;min-height:0}
+.invite{height:min(100vh - 32px,(44vw - 32px) * 1.4953)}
+.rsvp{padding:48px 44px 72px;min-height:100vh}
+.wrap{grid-template-columns:1fr;gap:26px;max-width:660px}
+h2{font-size:clamp(28px,2.8vw,40px);margin-bottom:14px}
+}
+@media (max-width:999px){
+.hero{min-height:0;padding:10px 8px 18px}
+.invite{height:auto;width:100%;max-width:560px}
+}
 </style>
 </head>
 <body>
