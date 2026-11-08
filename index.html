@@ -7,262 +7,244 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --green:#5d7d2a; --deep:#1f3d33; --gold:#b8892b; --cream:#f3ece0; --card:#fffdf8; --rust:#a65a43;
-    --bg:url('background.avif');
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:'DM Sans',sans-serif;color:var(--deep);background:var(--cream)}
-
-  /* ---------- PAGE 1: INVITATION ---------- */
-  .hero{
-    min-height:100vh;display:flex;align-items:center;justify-content:center;
-    position:relative;overflow:hidden;background:#3f5a1c;padding:16px;
-  }
-  .hero::before{content:"";position:absolute;inset:-40px;background:var(--bg) center/cover;filter:blur(22px) brightness(.7);}
-  .invite{
-    /* the invitation keeps the artwork's exact proportions */
-    position:relative;aspect-ratio:1070/1600;
-    height:min(100vh - 32px, (100vw - 32px) * 1.4953);
-    background:#5d7d2a var(--bg) center/100% 100% no-repeat;
-    container-type:inline-size;border-radius:2.2cqw;overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
-  }
-  .copy{
-    position:absolute;left:17%;right:17%;top:32.6%;height:44.6%;
-    display:flex;flex-direction:column;align-items:center;justify-content:space-between;
-    text-align:center;color:#4a3a14;
-  }
-  .kicker{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:2.5cqw;line-height:1.25;margin:0}
-  .names{font-family:'Playfair Display',serif;font-size:6.6cqw;line-height:1.05;margin:.4cqw 0;color:#7a5a12}
-  .names span{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:4.4cqw;margin:0 1.2cqw}
-  .sub{font-family:'Cormorant Garamond',serif;font-size:2.6cqw;margin:0}
-  .events{list-style:none;margin:0;padding:0;width:100%}
-  .events li{padding:.75cqw 0;border-top:1px solid rgba(184,137,43,.45)}
-  .events li:first-child{border-top:0}
-  .ev-name{font-family:'Playfair Display',serif;font-size:2.6cqw;margin:0;color:#6b4d0e}
-  .ev-meta{font-size:1.9cqw;margin:.1cqw 0 0;line-height:1.3}
-  .rsvp-by{position:absolute;left:0;right:0;top:80.4%;text-align:center}
-  .invite{position:relative;z-index:1}
-  .btn{
-    display:inline-block;background:var(--deep);color:#fff;text-decoration:none;
-    font-weight:700;letter-spacing:.14em;font-size:2.1cqw;padding:1.4cqw 4.2cqw;border-radius:99px;
-    border:1px solid var(--gold);transition:transform .15s,background .15s;cursor:pointer;
-  }
-  .btn:hover{background:#15302a;transform:translateY(-1px)}
-
-  /* ---------- PAGE 2: RSVP ---------- */
-  .rsvp{background:var(--cream);padding:72px 24px 96px}
-  .wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1.45fr;gap:56px;align-items:start}
-  .eyebrow{color:var(--rust);font-weight:700;letter-spacing:.3em;font-size:14px;margin:0 0 18px}
-  h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4.4vw,48px);line-height:1.15;margin:0 0 22px}
-  .lede{font-size:18px;line-height:1.55;color:#3d5a4f;margin:0}
-  .card{background:var(--card);border-radius:28px;padding:36px;box-shadow:0 6px 30px rgba(60,50,20,.08)}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px}
-  label,.q{display:block;font-size:17px;margin:0 0 8px}
-  .q{font-weight:700;margin:26px 0 12px}
-  input[type=text],input[type=email],input[type=tel],input[type=number],textarea{
-    width:100%;font:inherit;color:var(--deep);background:#fffefb;
-    border:1.5px solid #cfd3c8;border-radius:14px;padding:15px 16px;
-  }
-  input:focus,textarea:focus{outline:2px solid var(--green);border-color:var(--green)}
-  textarea{min-height:110px;resize:vertical}
-  .choices{display:flex;gap:26px;flex-wrap:wrap}
-  .choices label{display:flex;gap:8px;align-items:center;margin:0;cursor:pointer}
-  .evgrid{display:grid;grid-template-columns:1fr;gap:10px}
-  .evgrid label{display:flex;gap:12px;align-items:flex-start;margin:0;padding:12px 14px;border:1.5px solid #e0e0d2;border-radius:14px;cursor:pointer;background:#fffefb}
-  .evgrid label small{display:block;color:#5d7268;font-size:14px;margin-top:2px}
-  .evgrid input{margin-top:5px;accent-color:var(--deep)}
-  .submit{margin-top:28px;width:100%;font:inherit;font-weight:700;letter-spacing:.12em;border:0;border-radius:99px;background:var(--deep);color:#fff;padding:17px;font-size:16px;cursor:pointer}
-  .submit:disabled{opacity:.6;cursor:wait}
-  .err{color:#a62626;font-size:15px;margin:16px 0 0;min-height:1em}
-  .hide{display:none!important}
-  .thanks h3{font-family:'Playfair Display',serif;font-size:30px;margin:0 0 10px}
-  .thanks p{line-height:1.55;color:#3d5a4f}
-  .cal{display:flex;flex-direction:column;gap:12px;margin-top:22px}
-  .cal-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;border:1.5px solid #e0e0d2;border-radius:14px}
-  .cal-row b{display:block}.cal-row span{font-size:14px;color:#5d7268}
-  .cal-actions a{font-size:14px;font-weight:700;color:var(--deep);margin-left:14px;text-decoration:underline}
-
-  @media (max-width:860px){
-    .wrap{grid-template-columns:1fr;gap:28px}
-    .grid2{grid-template-columns:1fr}
-    .card{padding:24px}
-  }
+:root{
+--green:#5d7d2a; --deep:#1f3d33; --gold:#b8892b; --cream:#f3ece0; --card:#fffdf8; --rust:#a65a43;
+--bg:url('background.avif');
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'DM Sans',sans-serif;color:var(--deep);background:var(--cream)}
+.hero{
+min-height:100vh;display:flex;align-items:center;justify-content:center;
+position:relative;overflow:hidden;background:#3f5a1c;padding:16px;
+}
+.hero::before{content:"";position:absolute;inset:-40px;background:var(--bg) center/cover;filter:blur(22px) brightness(.7);}
+.invite{
+position:relative;aspect-ratio:1070/1600;
+height:min(100vh - 32px, (100vw - 32px) * 1.4953);
+background:#5d7d2a var(--bg) center/100% 100% no-repeat;
+container-type:inline-size;border-radius:2.2cqw;overflow:hidden;
+box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+.copy{
+position:absolute;left:17%;right:17%;top:32.6%;height:44.6%;
+display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+text-align:center;color:#4a3a14;
+}
+.kicker{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:2.5cqw;line-height:1.25;margin:0}
+.names{font-family:'Playfair Display',serif;font-size:6.6cqw;line-height:1.05;margin:.4cqw 0;color:#7a5a12}
+.names span{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:4.4cqw;margin:0 1.2cqw}
+.sub{font-family:'Cormorant Garamond',serif;font-size:2.6cqw;margin:0}
+.events{list-style:none;margin:0;padding:0;width:100%}
+.events li{padding:.75cqw 0;border-top:1px solid rgba(184,137,43,.45)}
+.events li:first-child{border-top:0}
+.ev-name{font-family:'Playfair Display',serif;font-size:2.6cqw;margin:0;color:#6b4d0e}
+.ev-meta{font-size:1.9cqw;margin:.1cqw 0 0;line-height:1.3}
+.rsvp-by{position:absolute;left:0;right:0;top:80.4%;text-align:center}
+.invite{position:relative;z-index:1}
+.btn{
+display:inline-block;background:var(--deep);color:#fff;text-decoration:none;
+font-weight:700;letter-spacing:.14em;font-size:2.1cqw;padding:1.4cqw 4.2cqw;border-radius:99px;
+border:1px solid var(--gold);transition:transform .15s,background .15s;cursor:pointer;
+}
+.btn:hover{background:#15302a;transform:translateY(-1px)}
+.maplink{display:inline-block;font-size:1.7cqw;color:#6b4d0e;text-decoration:underline;margin-top:.3cqw}
+.venues{margin-top:26px}
+.venues h4{font-family:'Playfair Display',serif;font-size:19px;margin:0 0 10px;color:var(--deep)}
+.venues a{display:block;color:var(--deep);text-decoration:none;font-size:15px;line-height:1.5;padding:10px 14px;border:1.5px solid #e0e0d2;border-radius:12px;margin-bottom:10px;background:#fffefb}
+.venues a b{display:block}.venues a span{color:#5d7268;font-size:13px}
+.rsvp{background:var(--cream);padding:72px 24px 96px}
+.wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1.45fr;gap:56px;align-items:start}
+.eyebrow{color:var(--rust);font-weight:700;letter-spacing:.3em;font-size:14px;margin:0 0 18px}
+h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4.4vw,48px);line-height:1.15;margin:0 0 22px}
+.lede{font-size:18px;line-height:1.55;color:#3d5a4f;margin:0}
+.card{background:var(--card);border-radius:28px;padding:36px;box-shadow:0 6px 30px rgba(60,50,20,.08)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px}
+label,.q{display:block;font-size:17px;margin:0 0 8px}
+.q{font-weight:700;margin:26px 0 12px}
+input[type=text],input[type=email],input[type=tel],input[type=number],textarea{
+width:100%;font:inherit;color:var(--deep);background:#fffefb;
+border:1.5px solid #cfd3c8;border-radius:14px;padding:15px 16px;
+}
+input:focus,textarea:focus{outline:2px solid var(--green);border-color:var(--green)}
+textarea{min-height:110px;resize:vertical}
+.choices{display:flex;gap:26px;flex-wrap:wrap}
+.choices label{display:flex;gap:8px;align-items:center;margin:0;cursor:pointer}
+.evgrid{display:grid;grid-template-columns:1fr;gap:10px}
+.evgrid label{display:flex;gap:12px;align-items:flex-start;margin:0;padding:12px 14px;border:1.5px solid #e0e0d2;border-radius:14px;cursor:pointer;background:#fffefb}
+.evgrid label small{display:block;color:#5d7268;font-size:14px;margin-top:2px}
+.evgrid input{margin-top:5px;accent-color:var(--deep)}
+.submit{margin-top:28px;width:100%;font:inherit;font-weight:700;letter-spacing:.12em;border:0;border-radius:99px;background:var(--deep);color:#fff;padding:17px;font-size:16px;cursor:pointer}
+.submit:disabled{opacity:.6;cursor:wait}
+.err{color:#a62626;font-size:15px;margin:16px 0 0;min-height:1em}
+.hide{display:none!important}
+.thanks h3{font-family:'Playfair Display',serif;font-size:30px;margin:0 0 10px}
+.thanks p{line-height:1.55;color:#3d5a4f}
+.cal{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.cal-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;border:1.5px solid #e0e0d2;border-radius:14px}
+.cal-row b{display:block}.cal-row span{font-size:14px;color:#5d7268}
+.cal-actions a{font-size:14px;font-weight:700;color:var(--deep);margin-left:14px;text-decoration:underline}
+@media (max-width:860px){
+.wrap{grid-template-columns:1fr;gap:28px}
+.grid2{grid-template-columns:1fr}
+.card{padding:24px}
+}
 </style>
 </head>
 <body>
-
-<!-- ===== PAGE 1 : INVITATION ===== -->
 <section class="hero" id="top">
-  <div class="invite">
-    <div class="copy">
-      <p class="kicker">With the blessings of our elders and families,<br>we joyfully invite you to celebrate the wedding of</p>
-      <h1 class="names">Vijay<span>&amp;</span>Navya</h1>
-      <ul class="events" id="inviteEvents"></ul>
-      <p class="kicker" style="font-size:2.3cqw">McKinney, Texas · December 2026</p>
-          </div>
-    <div class="rsvp-by"><a class="btn" href="#rsvp" onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});return false;">RSVP</a></div>
-  </div>
+<div class="invite">
+<div class="copy">
+<p class="kicker">With the blessings of our elders and families,<br>we joyfully invite you to celebrate the wedding of</p>
+<h1 class="names">Vijay<span>&amp;</span>Navya</h1>
+<ul class="events" id="inviteEvents"></ul>
+<p class="kicker" style="font-size:2.3cqw">McKinney, Texas · December 2026</p>
+</div>
+<div class="rsvp-by"><a class="btn" href="#rsvp" onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});return false;">RSVP</a></div>
+</div>
 </section>
-
-<!-- ===== PAGE 2 : RSVP ===== -->
 <section class="rsvp" id="rsvp">
-  <div class="wrap">
-    <div>
-      <p class="eyebrow">RSVP</p>
-      <h2>Will You Be Celebrating With Us?</h2>
-      <p class="lede">Please let us know your plans so we can save a place for you at our table, on the dance floor, and in the memories.</p>
-    </div>
-
-    <div class="card">
-      <form id="form" novalidate>
-        <div class="grid2">
-          <div><label for="name">Guest / Family Name *</label><input id="name" type="text" autocomplete="name"></div>
-          <div><label for="email">Email Address *</label><input id="email" type="email" autocomplete="email"></div>
-          <div><label for="phone">Phone Number *</label><input id="phone" type="tel" autocomplete="tel"></div>
-          <div><label for="guests">Number of Guests Attending *</label><input id="guests" type="number" min="1" max="20" value="1"></div>
-        </div>
-
-        <p class="q">Will you be attending the wedding celebrations? *</p>
-        <div class="choices">
-          <label><input type="radio" name="attending" value="yes"> Yes, absolutely</label>
-          <label><input type="radio" name="attending" value="no"> Unfortunately, we won't be able to attend</label>
-        </div>
-
-        <div id="eventsBlock">
-          <p class="q">Which celebrations will you be joining?</p>
-          <div class="evgrid" id="eventChecks"></div>
-        </div>
-
-        <p class="q" style="margin-top:26px">Leave a Note for Vijay &amp; Navya</p>
-        <textarea id="note"></textarea>
-
-        <button class="submit" id="submitBtn" type="submit">SEND RSVP</button>
-        <p class="err" id="err" role="alert"></p>
-      </form>
-
-      <div class="thanks hide" id="thanks">
-        <h3 id="thanksTitle">Thank you!</h3>
-        <p id="thanksText"></p>
-        <div class="cal" id="calList"></div>
-      </div>
-    </div>
-  </div>
+<div class="wrap">
+<div>
+<p class="eyebrow">RSVP</p>
+<h2>Will You Be Celebrating With Us?</h2>
+<p class="lede">Please let us know your plans so we can save a place for you at our table, on the dance floor, and in the memories.</p>
+<div class="venues" id="venues"></div>
+</div>
+<div class="card">
+<form id="form" novalidate>
+<div class="grid2">
+<div><label for="name">Guest / Family Name *</label><input id="name" type="text" autocomplete="name"></div>
+<div><label for="email">Email Address *</label><input id="email" type="email" autocomplete="email"></div>
+<div><label for="phone">Phone Number *</label><input id="phone" type="tel" autocomplete="tel"></div>
+<div><label for="guests">Number of Guests Attending *</label><input id="guests" type="number" min="1" max="20" value="1"></div>
+</div>
+<p class="q">Will you be attending the wedding celebrations? *</p>
+<div class="choices">
+<label><input type="radio" name="attending" value="yes"> Yes, absolutely</label>
+<label><input type="radio" name="attending" value="no"> Unfortunately, we won't be able to attend</label>
+</div>
+<div id="eventsBlock">
+<p class="q">Which celebrations will you be joining?</p>
+<div class="evgrid" id="eventChecks"></div>
+</div>
+<p class="q" style="margin-top:26px">Leave a Note for Vijay &amp; Navya</p>
+<textarea id="note"></textarea>
+<button class="submit" id="submitBtn" type="submit">SEND RSVP</button>
+<p class="err" id="err" role="alert"></p>
+</form>
+<div class="thanks hide" id="thanks">
+<h3 id="thanksTitle">Thank you!</h3>
+<p id="thanksText"></p>
+<div class="cal" id="calList"></div>
+</div>
+</div>
+</div>
 </section>
-
 <script>
-/* =====================================================================
-   CONFIG — edit these
-   ===================================================================== */
 const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';   // see Code.gs setup steps
 const TZ = 'America/Chicago';
 const UTC_OFFSET_HOURS = 6;  // CST in December (add 6h to get UTC)
-
 // Keep this list in sync with EVENTS in Code.gs
 const EVENTS = [
-  { id:'pelli',   title:'Pelli Koduku & Pelli Kuthuru', short:'Pelli Koduku & Pelli Kuthuru',
-    date:'2026-12-20', start:'15:00', end:'19:00', when:'Sun, Dec 20 · 3:00 PM & 5:00 PM',
-    venue:'McKinney, TX', desc:'Pelli Koduku (3 PM) and Pelli Kuthuru (5 PM).' },
-  { id:'mehendi', title:'Mehendi', short:'Mehendi',
-    date:'2026-12-21', start:'16:00', end:'20:00', when:'Mon, Dec 21 · 4:00 PM',
-    venue:'5931 County Rd 471, McKinney, TX 75071', desc:'Mehendi celebration.' },
-  { id:'haldi',   title:'Haldi', short:'Haldi',
-    date:'2026-12-22', start:'10:00', end:'13:00', when:'Tue, Dec 22 · 10:00 AM',
-    venue:'5931 County Rd 471, McKinney, TX 75071', desc:'Haldi celebration.' },
-  { id:'wedding', title:'Wedding — Vijay & Navya', short:'Wedding',
-    date:'2026-12-23', start:'10:00', end:'14:00', when:'Wed, Dec 23 · Muhurtham 10:21 AM',
-    venue:'4253 County Rd 412, McKinney, TX 75071', desc:'Wedding ceremony. Muhurtham at 10:21 AM, followed by lunch.' },
+{ id:'pelli',   title:'Pelli Koduku & Pelli Kuthuru', short:'Pelli Koduku & Pelli Kuthuru',
+date:'2026-12-20', start:'15:00', end:'19:00', when:'Sun, Dec 20 · 3:00 PM & 5:00 PM',
+venue:'McKinney, TX', desc:'Pelli Koduku (3 PM) and Pelli Kuthuru (5 PM).' },
+{ id:'mehendi', title:'Mehendi', short:'Mehendi',
+date:'2026-12-21', start:'16:00', end:'20:00', when:'Mon, Dec 21 · 4:00 PM',
+venue:'5931 County Rd 471, McKinney, TX 75071', desc:'Mehendi celebration.' },
+{ id:'haldi',   title:'Haldi', short:'Haldi',
+date:'2026-12-22', start:'10:00', end:'13:00', when:'Tue, Dec 22 · 10:00 AM',
+venue:'5931 County Rd 471, McKinney, TX 75071', desc:'Haldi celebration.' },
+{ id:'wedding', title:'Wedding — Vijay & Navya', short:'Wedding',
+date:'2026-12-23', start:'10:00', end:'14:00', when:'Wed, Dec 23 · Muhurtham 10:21 AM',
+venue:'4253 County Rd 412, McKinney, TX 75071', desc:'Wedding ceremony. Muhurtham at 10:21 AM, followed by lunch.' },
 ];
-/* ===================================================================== */
-
 const $ = s => document.querySelector(s);
-
+const mapUrl = e => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(e.venue);
 // invitation list on page 1
 $('#inviteEvents').innerHTML = EVENTS.map(e =>
-  `<li><p class="ev-name">${e.short}</p><p class="ev-meta">${e.when}${e.venue.includes('County Rd') ? '<br>' + e.venue.replace(', McKinney, TX 75071','') : ''}</p></li>`
+`<li><p class="ev-name">${e.short}</p><p class="ev-meta">${e.when}${e.venue.includes('County Rd') ? '<br>' + e.venue.replace(', McKinney, TX 75071','') : ''}</p><a class="maplink" href="${mapUrl(e)}" target="_blank" rel="noopener">\uD83D\uDCCD Location</a></li>`
 ).join('');
-
 // event checkboxes on page 2
 $('#eventChecks').innerHTML = EVENTS.map(e =>
-  `<label><input type="checkbox" name="ev" value="${e.id}" checked><span><b>${e.short}</b><small>${e.when}</small></span></label>`
+`<label><input type="checkbox" name="ev" value="${e.id}" checked><span><b>${e.short}</b><small>${e.when} &middot; <a href="${mapUrl(e)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83D\uDCCD Map</a></small></span></label>`
 ).join('');
-
+// venue list beside the RSVP form
+(function(){
+const seen = {}, rows = [];
+EVENTS.forEach(e => { if (seen[e.venue]) { seen[e.venue].names.push(e.short); } else { seen[e.venue] = {names:[e.short], venue:e.venue}; rows.push(seen[e.venue]); } });
+$('#venues').innerHTML = '<h4>Venues</h4>' + rows.map(r =>
+`<a href="${'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.venue)}" target="_blank" rel="noopener"><b>\uD83D\uDCCD ${r.names.join(', ')}</b><span>${r.venue}</span></a>`).join('');
+})();
 document.querySelectorAll('input[name=attending]').forEach(r => r.addEventListener('change', () => {
-  $('#eventsBlock').classList.toggle('hide', r.value === 'no' && r.checked);
+$('#eventsBlock').classList.toggle('hide', r.value === 'no' && r.checked);
 }));
-
-/* ---------- calendar helpers ---------- */
 const pad = n => String(n).padStart(2,'0');
 function utcStamp(date, time){
-  const [y,m,d] = date.split('-').map(Number), [hh,mm] = time.split(':').map(Number);
-  const dt = new Date(Date.UTC(y, m-1, d, hh + UTC_OFFSET_HOURS, mm));
-  return `${dt.getUTCFullYear()}${pad(dt.getUTCMonth()+1)}${pad(dt.getUTCDate())}T${pad(dt.getUTCHours())}${pad(dt.getUTCMinutes())}00Z`;
+const [y,m,d] = date.split('-').map(Number), [hh,mm] = time.split(':').map(Number);
+const dt = new Date(Date.UTC(y, m-1, d, hh + UTC_OFFSET_HOURS, mm));
+return `${dt.getUTCFullYear()}${pad(dt.getUTCMonth()+1)}${pad(dt.getUTCDate())}T${pad(dt.getUTCHours())}${pad(dt.getUTCMinutes())}00Z`;
 }
 function googleLink(e){
-  const q = new URLSearchParams({action:'TEMPLATE', text:e.title, dates:`${utcStamp(e.date,e.start)}/${utcStamp(e.date,e.end)}`, details:e.desc, location:e.venue, ctz:TZ});
-  return 'https://calendar.google.com/calendar/render?' + q;
+const q = new URLSearchParams({action:'TEMPLATE', text:e.title, dates:`${utcStamp(e.date,e.start)}/${utcStamp(e.date,e.end)}`, details:e.desc, location:e.venue, ctz:TZ});
+return 'https://calendar.google.com/calendar/render?' + q;
 }
 function icsFor(list){
-  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Vijay and Navya Wedding//EN','CALSCALE:GREGORIAN'];
-  list.forEach(e => lines.push('BEGIN:VEVENT',`UID:${e.id}-2026@vijay-navya-wedding`,`DTSTAMP:${utcStamp('2026-11-01','00:00')}`,
-    `DTSTART:${utcStamp(e.date,e.start)}`,`DTEND:${utcStamp(e.date,e.end)}`,`SUMMARY:${e.title}`,
-    `LOCATION:${e.venue.replace(/,/g,'\\,')}`,`DESCRIPTION:${e.desc}`,
-    'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Tomorrow: '+e.title,'END:VALARM','END:VEVENT'));
-  lines.push('END:VCALENDAR');
-  return lines.join('\r\n');
+const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Vijay and Navya Wedding//EN','CALSCALE:GREGORIAN'];
+list.forEach(e => lines.push('BEGIN:VEVENT',`UID:${e.id}-2026@vijay-navya-wedding`,`DTSTAMP:${utcStamp('2026-11-01','00:00')}`,
+`DTSTART:${utcStamp(e.date,e.start)}`,`DTEND:${utcStamp(e.date,e.end)}`,`SUMMARY:${e.title}`,
+`LOCATION:${e.venue.replace(/,/g,'\\,')}`,`DESCRIPTION:${e.desc}`,
+'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Tomorrow: '+e.title,'END:VALARM','END:VEVENT'));
+lines.push('END:VCALENDAR');
+return lines.join('\r\n');
 }
 function icsHref(list){ return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsFor(list)); }
-
-/* ---------- submit ---------- */
 $('#form').addEventListener('submit', async ev => {
-  ev.preventDefault();
-  const err = $('#err'); err.textContent = '';
-  const v = {
-    name: $('#name').value.trim(), email: $('#email').value.trim(), phone: $('#phone').value.trim(),
-    guests: parseInt($('#guests').value,10) || 0, note: $('#note').value.trim(),
-    attending: (document.querySelector('input[name=attending]:checked')||{}).value || '',
-    events: [...document.querySelectorAll('input[name=ev]:checked')].map(c => c.value),
-  };
-  if (v.attending === 'no') v.events = [];
-  if (!v.name || !v.phone || !v.email || !v.attending || v.guests < 1){
-    err.textContent = 'Please complete the required details before sending your RSVP.'; return;
-  }
-  if (!/^\S+@\S+\.\S+$/.test(v.email)){ err.textContent = 'Please enter a valid email so we can send your calendar invites.'; return; }
-  if (v.attending === 'yes' && !v.events.length){ err.textContent = 'Please choose at least one celebration.'; return; }
-  const hosted = typeof google !== 'undefined' && google.script && google.script.run;
-  if (!hosted && SCRIPT_URL.startsWith('PASTE_')){ err.textContent = 'RSVP backend is not connected yet.'; return; }
-
-  const btn = $('#submitBtn'); btn.disabled = true; btn.textContent = 'SENDING…';
-  try{
-    if (hosted){
-      // Running on Google Apps Script: call the server directly
-      await new Promise((ok, fail) => google.script.run.withSuccessHandler(ok).withFailureHandler(fail).submitRsvp(v));
-    } else {
-      await fetch(SCRIPT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(v)});
-    }
-  }catch(x){
-    err.textContent = 'Something went wrong sending your RSVP. Please try again.'; btn.disabled = false; btn.textContent = 'SEND RSVP'; return;
-  }
-  showThanks(v);
+ev.preventDefault();
+const err = $('#err'); err.textContent = '';
+const v = {
+name: $('#name').value.trim(), email: $('#email').value.trim(), phone: $('#phone').value.trim(),
+guests: parseInt($('#guests').value,10) || 0, note: $('#note').value.trim(),
+attending: (document.querySelector('input[name=attending]:checked')||{}).value || '',
+events: [...document.querySelectorAll('input[name=ev]:checked')].map(c => c.value),
+};
+if (v.attending === 'no') v.events = [];
+if (!v.name || !v.phone || !v.email || !v.attending || v.guests < 1){
+err.textContent = 'Please complete the required details before sending your RSVP.'; return;
+}
+if (!/^\S+@\S+\.\S+$/.test(v.email)){ err.textContent = 'Please enter a valid email so we can send your calendar invites.'; return; }
+if (v.attending === 'yes' && !v.events.length){ err.textContent = 'Please choose at least one celebration.'; return; }
+const hosted = typeof google !== 'undefined' && google.script && google.script.run;
+if (!hosted && SCRIPT_URL.startsWith('PASTE_')){ err.textContent = 'RSVP backend is not connected yet.'; return; }
+const btn = $('#submitBtn'); btn.disabled = true; btn.textContent = 'SENDING…';
+try{
+if (hosted){
+// Running on Google Apps Script: call the server directly
+await new Promise((ok, fail) => google.script.run.withSuccessHandler(ok).withFailureHandler(fail).submitRsvp(v));
+} else {
+await fetch(SCRIPT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(v)});
+}
+}catch(x){
+err.textContent = 'Something went wrong sending your RSVP. Please try again.'; btn.disabled = false; btn.textContent = 'SEND RSVP'; return;
+}
+showThanks(v);
 });
-
 function showThanks(v){
-  $('#form').classList.add('hide'); $('#thanks').classList.remove('hide');
-  if (v.attending === 'no'){
-    $('#thanksTitle').textContent = 'We will miss you!';
-    $('#thanksText').textContent = 'Thank you for letting us know, ' + v.name + '. You will be in our hearts on the big day.';
-    return;
-  }
-  const chosen = EVENTS.filter(e => v.events.includes(e.id));
-  $('#thanksTitle').textContent = 'Thank you, ' + v.name + '!';
-  $('#thanksText').textContent = 'Your RSVP is in. Calendar invites are on their way to ' + v.email + ' and will land on your calendar, and we will send you friendly reminders as the day gets closer. You can also add them right now:';
-  $('#calList').innerHTML =
-    `<a class="btn" style="text-align:center;font-size:15px;padding:14px" download="Vijay-Navya-Wedding.ics" href="${icsHref(chosen)}">ADD ALL TO CALENDAR (.ics)</a>` +
-    chosen.map(e => `<div class="cal-row"><div><b>${e.short}</b><span>${e.when}</span></div>
-      <div class="cal-actions"><a target="_blank" rel="noopener" href="${googleLink(e)}">Google</a>
-      <a download="${e.id}.ics" href="${icsHref([e])}">Apple / Outlook</a></div></div>`).join('');
+$('#form').classList.add('hide'); $('#thanks').classList.remove('hide');
+if (v.attending === 'no'){
+$('#thanksTitle').textContent = 'We will miss you!';
+$('#thanksText').textContent = 'Thank you for letting us know, ' + v.name + '. You will be in our hearts on the big day.';
+return;
+}
+const chosen = EVENTS.filter(e => v.events.includes(e.id));
+$('#thanksTitle').textContent = 'Thank you, ' + v.name + '!';
+$('#thanksText').textContent = 'Your RSVP is in. Calendar invites are on their way to ' + v.email + ' and will land on your calendar, and we will send you friendly reminders as the day gets closer. You can also add them right now:';
+$('#calList').innerHTML =
+`<a class="btn" style="text-align:center;font-size:15px;padding:14px" download="Vijay-Navya-Wedding.ics" href="${icsHref(chosen)}">ADD ALL TO CALENDAR (.ics)</a>` +
+chosen.map(e => `<div class="cal-row"><div><b>${e.short}</b><span>${e.when}</span></div>
+<div class="cal-actions"><a target="_blank" rel="noopener" href="${mapUrl(e)}">\uD83D\uDCCD Map</a><a target="_blank" rel="noopener" href="${googleLink(e)}">Google</a>
+<a download="${e.id}.ics" href="${icsHref([e])}">Apple / Outlook</a></div></div>`).join('');
 }
 </script>
 </body>
