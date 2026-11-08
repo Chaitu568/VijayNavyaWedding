@@ -305,6 +305,12 @@ form.card { background: var(--card); border: 1.5px solid var(--gold-soft); borde
 #rsvp-form .field textarea { min-height: 58px; }
 #rsvp-form .narrow-field input { width: 110px; }
 #rsvp-submit { padding: 12px; font-size: 0.95rem; }
+.form-status {
+  display: none; margin-top: 14px; padding: 10px 14px; text-align: center;
+  border: 1.5px dashed var(--gold); border-radius: 10px; background: #fdf6da;
+  color: var(--maroon); font-size: 0.95rem;
+}
+.form-status.show { display: block; }
 .att-row {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
   padding: 9px 2px; border-bottom: 1px solid #eee0b8;
