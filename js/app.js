@@ -179,12 +179,15 @@
     var btn = document.getElementById("sound-toggle");
     btn.style.display = "";
     // Icon state follows the audio element's real state, not click bookkeeping
-    audio.addEventListener("play", function () { btn.classList.remove("muted"); });
-    audio.addEventListener("pause", function () { btn.classList.add("muted"); });
+    function syncIcon() { btn.classList.toggle("muted", audio.paused); }
+    audio.addEventListener("play", syncIcon);
+    audio.addEventListener("pause", syncIcon);
     audio.addEventListener("error", function () { btn.classList.add("muted"); });
     btn.addEventListener("click", function () {
       if (audio.paused) audio.play().catch(function () {});
       else audio.pause();
+      setTimeout(syncIcon, 100);
+      setTimeout(syncIcon, 450);
     });
   }
 
