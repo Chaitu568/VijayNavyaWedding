@@ -53,8 +53,8 @@
 
     setHTML("story-body", WEDDING.story.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join(""));
 
-    // Journey
-    setHTML("journey-list", WEDDING.events.map(function (e) {
+    // Journey — event blocks joined by a little footprint trail
+    var blocks = WEDDING.events.map(function (e) {
       return '<div class="journey-item reveal"><div class="journey-card">' +
         '<div class="event-icon">' + iconFor(e.id) + "</div>" +
         "<h3>" + esc(e.title) + "</h3>" +
@@ -62,6 +62,16 @@
         '<div class="event-meta">' + esc(e.venue) + "<br/>" + esc(e.address) + "</div>" +
         (e.note ? '<div class="event-note">' + esc(e.note) + "</div>" : "") +
         '<a class="map-btn" target="_blank" rel="noopener" href="' + esc(e.mapUrl) + '">📍 View Map</a>' +
+        "</div></div>";
+    });
+    setHTML("journey-list", blocks.join(TRAIL_HTML));
+
+    // RSVP — one compact Yes/No row per celebration
+    setHTML("rsvp-events", WEDDING.events.map(function (e) {
+      return '<div class="att-row"><div class="att-info"><b>' + esc(e.title) + "</b><span>" + esc(e.when) + "</span></div>" +
+        '<div class="seg">' +
+        '<label><input type="radio" name="att_' + e.id + '" value="yes" checked /><span>Yes</span></label>' +
+        '<label><input type="radio" name="att_' + e.id + '" value="no" /><span>No</span></label>' +
         "</div></div>";
     }).join(""));
 
@@ -83,11 +93,19 @@
       mehendi: '<circle cx="24" cy="13" r="4.6"/><circle cx="34.5" cy="18.5" r="4.6"/><circle cx="34.5" cy="29.5" r="4.6"/><circle cx="24" cy="35" r="4.6"/><circle cx="13.5" cy="29.5" r="4.6"/><circle cx="13.5" cy="18.5" r="4.6"/><circle cx="24" cy="24" r="3.4" fill="currentColor" stroke="none"/>',
       haldi: '<circle cx="24" cy="24" r="7.5"/><path d="M24 8v5M24 35v5M8 24h5M35 24h5M12.7 12.7l3.5 3.5M31.8 31.8l3.5 3.5M35.3 12.7l-3.5 3.5M16.2 31.8l-3.5 3.5"/>',
       ceremony: '<path d="M24 6v4"/><path d="M24 10a9.5 9.5 0 0 1 9.5 9.5c0 5.2 2 7.3 3.2 8.5H11.3c1.2-1.2 3.2-3.3 3.2-8.5A9.5 9.5 0 0 1 24 10z"/><circle cx="24" cy="33.5" r="2.6"/><path d="M18 42h12"/>',
-      reception: '<path d="M24 5l4.2 14.8L43 24l-14.8 4.2L24 43l-4.2-14.8L5 24l14.8-4.2z"/>'
+      reception: '<path d="M24 5l4.2 14.8L43 24l-14.8 4.2L24 43l-4.2-14.8L5 24l14.8-4.2z"/>',
+      wedding: '<path d="M24 6v4"/><path d="M24 10a9.5 9.5 0 0 1 9.5 9.5c0 5.2 2 7.3 3.2 8.5H11.3c1.2-1.2 3.2-3.3 3.2-8.5A9.5 9.5 0 0 1 24 10z"/><circle cx="24" cy="33.5" r="2.6"/><path d="M18 42h12"/>',
+      pelli: '<path d="M24 38c-10-6-12.5-15.5-5-23.5C24 17.5 28 17.5 29 14.5 41.5 22 35 32 24 38z"/><path d="M10 40c4 2.5 9 3.5 14 3.5S34 42.5 38 40"/>'
     };
     var inner = P[id] || '<path d="M24 36c-9-5.5-11-14-4.5-21C24 18 28 18 28.5 15 39 22 33 30.5 24 36z"/>';
     return '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + "</svg>";
   }
+
+  /* ---------- Footprint trail (original shapes) ---------- */
+  function foot(cls) {
+    return '<svg class="' + cls + '" viewBox="0 0 24 36" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="23" rx="6.4" ry="9.2"/><circle cx="5.2" cy="8.6" r="2"/><circle cx="9.6" cy="6" r="2.4"/><circle cx="14.2" cy="6" r="2.2"/><circle cx="18.4" cy="8.6" r="1.7"/></svg>';
+  }
+  var TRAIL_HTML = '<div class="trail" aria-hidden="true">' + foot("step s1") + foot("step s2") + foot("step s3") + "</div>";
 
   function setPhoto(id, src, name) {
     var el = document.getElementById(id);
@@ -104,7 +122,7 @@
       // Music starts on this tap (browsers block autoplay before interaction)
       if (audio && audio.paused) {
         audio.play().then(function () {
-          document.getElementById("sound-toggle").textContent = "🔊";
+          document.getElementById("sound-toggle").classList.remove("muted");
         }).catch(function () { /* music file missing — stay silent */ });
       }
       window.scrollTo(0, 0);
@@ -164,10 +182,10 @@
     btn.style.display = "";
     btn.addEventListener("click", function () {
       if (audio.paused) {
-        audio.play().then(function () { btn.textContent = "🔊"; }).catch(function () {});
+        audio.play().then(function () { btn.classList.remove("muted"); }).catch(function () {});
       } else {
         audio.pause();
-        btn.textContent = "🔇";
+        btn.classList.add("muted");
       }
     });
   }
@@ -199,11 +217,11 @@
       db.from("rsvps").insert({
         name: name,
         phone: phone,
-        attending_ceremony: radio("ceremony") === "yes",
-        attending_reception: radio("reception") === "yes",
+        attending_pelli: radio("att_pelli") === "yes",
+        attending_mehendi: radio("att_mehendi") === "yes",
+        attending_haldi: radio("att_haldi") === "yes",
+        attending_ceremony: radio("att_wedding") === "yes",
         headcount: Math.min(20, Math.max(1, parseInt(val("r-headcount"), 10) || 1)),
-        meal_pref: radio("meal"),
-        dietary_notes: null,
         message: val("r-notes").trim() || null,
       }).then(function (res) {
         btn.disabled = false; btn.textContent = "Send RSVP";
@@ -214,48 +232,9 @@
     });
   }
 
-  /* ---------- Wishes ---------- */
-  function bindWishes() {
-    loadWishes();
-    document.getElementById("wish-form").addEventListener("submit", function (ev) {
-      ev.preventDefault();
-      var name = val("w-name").trim(), msg = val("w-msg").trim();
-      if (!name) return nudge("w-name", "Please tell us your name.");
-      if (!msg) return nudge("w-msg", "Please write your wish.");
-      if (!db) return alert("Wishes are not connected yet — please try again later.");
-
-      var btn = document.getElementById("wish-submit");
-      btn.disabled = true; btn.textContent = "Sharing…";
-
-      db.from("wishes").insert({ name: name, message: msg }).then(function (res) {
-        btn.disabled = false; btn.textContent = "Share Wish";
-        if (res.error) { alert("Something went wrong. Please try again."); return; }
-        ev.target.querySelectorAll(".field, #wish-submit, .form-note").forEach(function (el) { el.style.display = "none"; });
-        document.getElementById("wish-ok").classList.add("show");
-      });
-    });
-  }
-
-  function loadWishes() {
-    var list = document.getElementById("wishes-list");
-    if (!db) { list.innerHTML = '<div class="wishes-empty">Wishes will appear here soon.</div>'; return; }
-    db.from("wishes").select("name,message,created_at")
-      .eq("approved", true).order("created_at", { ascending: false }).limit(100)
-      .then(function (res) {
-        if (res.error || !res.data || !res.data.length) {
-          list.innerHTML = '<div class="wishes-empty">Be the first to leave a blessing ♡</div>';
-          return;
-        }
-        list.innerHTML = res.data.map(function (w) {
-          return '<div class="wish"><p>“' + esc(w.message) + '”</p><div class="who">— ' + esc(w.name) + "</div></div>";
-        }).join("");
-      });
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     render();
     bindCover();
     bindRsvp();
-    bindWishes();
   });
 })();
