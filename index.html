@@ -68,7 +68,7 @@ border:1.5px solid #cfd3c8;border-radius:14px;padding:15px 16px;
 }
 input:focus,textarea:focus{outline:2px solid var(--green);border-color:var(--green)}
 textarea{min-height:110px;resize:vertical}
-.yn{display:flex;gap:14px}.yn label{flex:1;margin:0;cursor:pointer}.yn input{position:absolute;opacity:0;pointer-events:none}.yn span{display:block;text-align:center;padding:14px 10px;border:2px solid #c9d3c4;border-radius:12px;background:#fff;font-weight:700;color:#1f3a30;transition:.15s}.yn input:checked+span{background:#1f3a30;color:#fff;border-color:#1f3a30}.yn input:focus-visible+span{outline:3px solid #b8892b}
+.evrow{display:flex;gap:10px 14px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px 14px;border:1.5px solid #e0e0d2;border-radius:14px;background:#fffefb}.evrow small{display:block;color:#5d7268;font-size:14px;margin-top:2px}.att{display:flex;align-items:center;gap:6px}.att em{font-style:normal;font-weight:700;font-size:13px;margin-right:2px}.evgrid .att label{margin:0;padding:0;border:0;border-radius:0;background:none;display:inline-block;cursor:pointer}.att input{position:absolute;opacity:0;pointer-events:none}.att span{display:inline-block;padding:3px 13px;border-radius:99px;border:1.5px solid #b9c4b2;background:#fff;font-weight:700;font-size:12.5px;color:#1f3a30;line-height:1.5}.att input[value=yes]:checked+span{background:#1f3a30;border-color:#1f3a30;color:#fff}.att input[value=no]:checked+span{background:#a65a43;border-color:#a65a43;color:#fff}.att input:focus-visible+span{outline:2px solid #b8892b}
 .choices{display:flex;gap:26px;flex-wrap:wrap}
 .choices label{display:flex;gap:8px;align-items:center;margin:0;cursor:pointer}
 .evgrid{display:grid;grid-template-columns:1fr;gap:10px}
@@ -121,11 +121,9 @@ textarea{min-height:110px;resize:vertical}
 <div><label for="guests">Number of Guests Attending *</label><input id="guests" type="number" min="1" max="20" value="1"></div>
 </div>
         <div id="eventsBlock">
-<p class="q">Which celebrations will you be joining?</p>
+<p class="q">Will you be joining us for each celebration? *</p>
 <div class="evgrid" id="eventChecks"></div>
 </div>
-<p class="q" style="margin-top:26px">Attending? *</p>
-<div class="yn"><label><input type="radio" name="attending" value="yes"><span>Yes</span></label><label><input type="radio" name="attending" value="no"><span>No</span></label></div>
 <p class="q" style="margin-top:26px">Leave a Note for Vijay &amp; Navya</p>
 <textarea id="note"></textarea>
 <button class="submit" id="submitBtn" type="submit">SEND RSVP</button>
@@ -166,7 +164,7 @@ $('#inviteEvents').innerHTML = EVENTS.map(e =>
 ).join('');
 // event checkboxes on page 2
 $('#eventChecks').innerHTML = EVENTS.map(e =>
-`<label><input type="checkbox" name="ev" value="${e.id}" checked><span><b>${e.short}</b><small>${e.when} &middot; <a href="${mapUrl(e)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83D\uDCCD Map</a></small></span></label>`
+`<div class="evrow"><div><b>${e.short}</b><small>${e.when} &middot; <a href="${mapUrl(e)}" target="_blank" rel="noopener">\uD83D\uDCCD Map</a></small></div><div class="att"><em>Attending</em><label><input type="radio" name="att_${e.id}" value="yes"><span>Yes</span></label><label><input type="radio" name="att_${e.id}" value="no"><span>No</span></label></div></div>`
 ).join('');
 // venue list beside the RSVP form
 (function(){
@@ -201,16 +199,17 @@ const err = $('#err'); err.textContent = '';
 const v = {
 name: $('#name').value.trim(), email: $('#email').value.trim(), phone: $('#phone').value.trim(),
 guests: parseInt($('#guests').value,10) || 0, note: $('#note').value.trim(),
-attending: (document.querySelector('input[name=attending]:checked')||{}).value || '',
-events: [...document.querySelectorAll('input[name=ev]:checked')].map(c => c.value),
+responses: {},
 };
+EVENTS.forEach(e => { v.responses[e.id] = (document.querySelector('input[name=att_'+e.id+']:checked')||{}).value || ''; });
+v.events = EVENTS.filter(e => v.responses[e.id]==='yes').map(e => e.id);
+v.attending = v.events.length ? 'yes' : 'no';
 
-if (v.attending === 'no') v.events = [];
-if (!v.name || !v.phone || !v.email || !v.attending || v.guests < 1){
+if (!v.name || !v.phone || !v.email || v.guests < 1){
 err.textContent = 'Please complete the required details before sending your RSVP.'; return;
 }
 if (!/^\S+@\S+\.\S+$/.test(v.email)){ err.textContent = 'Please enter a valid email so we can send your calendar invites.'; return; }
-if (v.attending === 'yes' && !v.events.length){ err.textContent = 'Please choose at least one celebration.'; return; }
+if (EVENTS.some(e => !v.responses[e.id])){ err.textContent = 'Please choose Yes or No for each celebration.'; return; }
 const hosted = typeof google !== 'undefined' && google.script && google.script.run;
 if (!hosted && SCRIPT_URL.startsWith('PASTE_')){ err.textContent = 'RSVP backend is not connected yet.'; return; }
 const btn = $('#submitBtn'); btn.disabled = true; btn.textContent = 'SENDING…';
