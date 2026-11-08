@@ -117,13 +117,19 @@
   /* ---------- Cover open ---------- */
   function bindCover() {
     document.getElementById("open-invite").addEventListener("click", function () {
-      document.getElementById("cover").classList.add("opened");
-      document.body.classList.remove("locked");
+      var cover = document.getElementById("cover");
+      if (cover.classList.contains("opening")) return;
+      cover.classList.add("opening");
       // Music starts on this tap (browsers block autoplay before interaction)
       if (audio && audio.paused) {
         audio.play().catch(function () { /* music unavailable — stay silent */ });
       }
       window.scrollTo(0, 0);
+      // Once the envelope has opened, fade the cover away to reveal the invitation
+      setTimeout(function () {
+        cover.classList.add("opened");
+        document.body.classList.remove("locked");
+      }, 1250);
     });
   }
 
