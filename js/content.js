@@ -12,16 +12,16 @@ const WEDDING = {
   },
   bride: {
     name: "Navya",
-    fullName: "Navya",
-    parents: "Daughter of Mr. & Mrs. …", // TODO: bride's family name + parents
+    fullName: "Navya Bharathi Bikki",
+    parents: "Daughter of Mr. & Mrs. Bikki", // TODO: parents' first names (not on Vijay's site)
   },
 
   blessing: "॥ Shri Ganeshaya Namah ॥",
 
   // Ceremony start in ISO format WITH timezone offset — drives the countdown.
-  dateISO: "2026-12-20T10:00:00+05:30", // TODO: real date & time
-  dateLine: "Sunday, 20th December 2026", // TODO
-  venueLine: "Venue Name, City", // TODO: main venue, shown on the cover
+  dateISO: "2026-12-23T10:21:00-06:00", // Wedding muhurtham, Dallas time (CST)
+  dateLine: "Wednesday, 23rd December 2026",
+  venueLine: "McKinney, Texas", // main venue line, shown on the cover
 
   tagline: "Two families, many blessings, one timeless celebration.",
 
@@ -31,53 +31,57 @@ const WEDDING = {
   ],
 
   // The wedding journey — one card per function, in order.
-  // mapUrl: paste the Google Maps share link for each venue.
+  // Details match Vijay's own event list (McKinney, Texas).
   events: [
+    {
+      id: "pelli",
+      title: "Pelli Koduku & Pelli Kuthuru",
+      date: "Sunday, 20th December 2026",
+      time: "3:00 PM & 5:00 PM",
+      when: "Sun, Dec 20 · 3:00 PM & 5:00 PM",
+      venue: "McKinney, TX",
+      address: "",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=McKinney%2C%20TX",
+      note: "Pelli Koduku (3 PM) and Pelli Kuthuru (5 PM).",
+    },
     {
       id: "mehendi",
       title: "Mehendi",
-      date: "Date — TODO",
-      time: "5:00 PM onwards",
-      venue: "Venue Name",
-      address: "Venue address, City",
-      mapUrl: "https://maps.google.com/?q=Hyderabad",
-      note: "An evening of colour, music and henna.",
+      date: "Monday, 21st December 2026",
+      time: "4:00 PM onwards",
+      when: "Mon, Dec 21 · 4:00 PM",
+      venue: "5931 County Rd 471",
+      address: "McKinney, TX 75071",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=5931%20County%20Rd%20471%2C%20McKinney%2C%20TX%2075071",
+      note: "Mehendi celebration.",
     },
     {
       id: "haldi",
-      title: "Haldi & Sangeet",
-      date: "Date — TODO",
+      title: "Haldi",
+      date: "Tuesday, 22nd December 2026",
       time: "10:00 AM onwards",
-      venue: "Venue Name",
-      address: "Venue address, City",
-      mapUrl: "https://maps.google.com/?q=Hyderabad",
-      note: "Turmeric, laughter, and a night of dance.",
+      when: "Tue, Dec 22 · 10:00 AM",
+      venue: "5931 County Rd 471",
+      address: "McKinney, TX 75071",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=5931%20County%20Rd%20471%2C%20McKinney%2C%20TX%2075071",
+      note: "Haldi celebration.",
     },
     {
-      id: "ceremony",
-      title: "Wedding Ceremony",
-      date: "Date — TODO",
-      time: "Muhurtham — TODO",
-      venue: "Venue Name",
-      address: "Venue address, City",
-      mapUrl: "https://maps.google.com/?q=Hyderabad",
-      note: "The sacred ceremony, followed by lunch.",
-    },
-    {
-      id: "reception",
-      title: "Reception",
-      date: "Date — TODO",
-      time: "6:30 PM onwards",
-      venue: "Venue Name",
-      address: "Venue address, City",
-      mapUrl: "https://maps.google.com/?q=Hyderabad",
-      note: "Dinner and celebrations with family and friends.",
+      id: "wedding",
+      title: "Wedding",
+      date: "Wednesday, 23rd December 2026",
+      time: "Muhurtham 10:21 AM",
+      when: "Wed, Dec 23 · Muhurtham 10:21 AM",
+      venue: "4253 County Rd 412",
+      address: "McKinney, TX 75071",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=4253%20County%20Rd%20412%2C%20McKinney%2C%20TX%2075071",
+      note: "Wedding ceremony. Muhurtham at 10:21 AM, followed by lunch.",
     },
   ],
 
   contact: {
-    label: "Questions? Call the family",
-    phone: "+91 00000 00000", // TODO
+    label: "Questions? Email us",
+    phone: "vijay.maddineni17@gmail.com",
   },
 
   footerBlessing: "With love and blessings, from both families",
