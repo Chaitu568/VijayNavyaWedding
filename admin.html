@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSVP Dashboard — Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="wrap admin-login" id="login-box">
+    <div class="sec-head"><h2>RSVP Dashboard</h2><p>Family access only</p></div>
+    <form id="login-form" class="card">
+      <div class="field">
+        <label for="a-email">Email</label>
+        <input type="text" id="a-email" autocomplete="username" placeholder="admin@example.com" />
+      </div>
+      <div class="field">
+        <label for="a-pass">Password</label>
+        <input type="text" id="a-pass" autocomplete="current-password" placeholder="••••••••" style="-webkit-text-security:disc" />
+      </div>
+      <button type="submit" class="btn btn-primary" id="login-btn" style="width:100%">Sign in</button>
+      <div class="form-note">Create this user once in Supabase Dashboard → Authentication → Add user.</div>
+    </form>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="admin-dash" id="dash" style="display:none">
+    <div class="admin-bar">
+      <h2>RSVP Dashboard</h2>
+      <button class="mini-btn" id="logout-btn">Sign out</button>
+    </div>
+
+    <div class="stat-grid" id="stats"></div>
+
+    <h3 style="color:var(--maroon); margin-bottom:4px">Responses</h3>
+    <div class="table-wrap"><table class="data" id="rsvp-table">
+      <thead><tr><th>When</th><th>Name</th><th>Phone</th><th>Ceremony</th><th>Reception</th><th>Guests</th><th>Meal</th><th>Message</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+
+    <h3 style="color:var(--maroon); margin-bottom:4px">Wishes awaiting review <span id="pending-count" style="color:var(--muted); font-size:0.85rem"></span></h3>
+    <div class="table-wrap"><table class="data" id="wish-table">
+      <thead><tr><th>When</th><th>Name</th><th>Wish</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

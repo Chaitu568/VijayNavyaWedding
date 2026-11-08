@@ -1,309 +1,214 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vijay &amp; Navya — Wedding Invitation &amp; RSVP</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<style>
-:root{
---green:#5d7d2a; --deep:#1f3d33; --gold:#b8892b; --cream:#f3ece0; --card:#fffdf8; --rust:#a65a43;
---bg:url('invitation-bg.jpg');
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:'DM Sans',sans-serif;color:var(--deep);background:var(--cream)}
-.hero{
-min-height:100vh;display:flex;align-items:center;justify-content:center;
-position:relative;overflow:hidden;background:#efdcae;padding:16px;
-}
-.hero::before{content:"";position:absolute;inset:-40px;background:radial-gradient(ellipse at 50% 40%,#fbf3de 0%,#efdcae 55%,#dcc080 100%);}
-.invite{
-position:relative;aspect-ratio:1070/1600;
-height:min(100vh - 32px, (100vw - 32px) * 1.4953);
-background:#5d7d2a var(--bg) center/100% 100% no-repeat;
-container-type:inline-size;border-radius:2.2cqw;overflow:hidden;
-box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-.copy{
-position:absolute;left:17%;right:17%;top:23.4%;height:56.1%;
-display:flex;flex-direction:column;align-items:center;justify-content:space-between;
-text-align:center;color:#4a3a14;
-}
-.kicker{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:2.9cqw;line-height:1.25;margin:0}
-.names{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:3.9cqw;line-height:1;margin:0;color:#5b4b12;display:flex;flex-direction:column;align-items:center;white-space:nowrap;text-transform:uppercase;letter-spacing:.2em}
-.names b{font-weight:500;margin-right:-.2em;word-spacing:-.3em}
-.names span{font-style:italic;text-transform:none;font-size:5.6cqw;line-height:.85;letter-spacing:0;color:#7a5a12}
-.sub{font-family:'Cormorant Garamond',serif;font-size:2.6cqw;margin:0}
-.events{list-style:none;margin:0;padding:0;width:100%}
-.events li{padding:.75cqw 0;border-top:1px solid rgba(184,137,43,.45)}
-.events li:first-child{border-top:0}
-.ev-name{font-family:'Playfair Display',serif;font-size:2.6cqw;margin:0;color:#6b4d0e}
-.ev-meta{font-size:1.9cqw;margin:.1cqw 0 0;line-height:1.3}
-.rsvp-by{position:absolute;left:0;right:0;top:80.4%;text-align:center}
-.invite{position:relative;z-index:1}
-.btn{
-display:inline-block;background:var(--deep);color:#fff;text-decoration:none;
-font-weight:700;letter-spacing:.14em;font-size:2.1cqw;padding:1.4cqw 4.2cqw;border-radius:99px;
-border:1px solid var(--gold);transition:transform .15s,background .15s;cursor:pointer;
-}
-.btn:hover{background:#15302a;transform:translateY(-1px)}
-.events li{border-top:1px dotted rgba(166,90,67,.55)}
-.ev-grid{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:.6cqw;text-align:left}
-.ev-grid .c{display:flex;gap:.9cqw;align-items:center;padding:0 .9cqw;border-left:1px solid rgba(166,90,67,.45);color:#4a3a14;text-decoration:none}
-.ev-grid .c:first-child{border-left:0;padding-left:0}
-.ev-grid svg{width:3.9cqw;height:3.9cqw;flex:none;stroke:#a65a43;fill:none;stroke-width:1.5}
-.ev-grid b{display:block;font-size:1.85cqw;color:#a65a43;letter-spacing:.04em}
-.ev-grid span{display:block;font-size:1.95cqw;line-height:1.25}
-a.c:hover span{text-decoration:underline}
-.maplink{display:inline-block;font-size:1.7cqw;color:#6b4d0e;text-decoration:underline;margin-top:.3cqw}
-.venues{margin-top:26px}
-.venues h4{font-family:'Playfair Display',serif;font-size:19px;margin:0 0 10px;color:var(--deep)}
-.venues a{display:block;color:var(--deep);text-decoration:none;font-size:15px;line-height:1.5;padding:10px 14px;border:1.5px solid #e0e0d2;border-radius:12px;margin-bottom:10px;background:#fffefb}
-.venues a b{display:block}.venues a span{color:#5d7268;font-size:13px}
-.rsvp{background:var(--cream);padding:72px 24px 96px}
-.wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1.45fr;gap:56px;align-items:start}
-.eyebrow{color:var(--rust);font-weight:700;letter-spacing:.3em;font-size:14px;margin:0 0 18px}
-h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4.4vw,48px);line-height:1.15;margin:0 0 22px}
-.lede{font-size:18px;line-height:1.55;color:#3d5a4f;margin:0}
-.card{background:var(--card);border-radius:28px;padding:36px;box-shadow:0 6px 30px rgba(60,50,20,.08)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px}
-label,.q{display:block;font-size:17px;margin:0 0 8px}
-.q{font-weight:700;margin:26px 0 12px}
-input[type=text],input[type=email],input[type=tel],input[type=number],textarea{
-width:100%;font:inherit;color:var(--deep);background:#fffefb;
-border:1.5px solid #cfd3c8;border-radius:14px;padding:15px 16px;
-}
-input:focus,textarea:focus{outline:2px solid var(--green);border-color:var(--green)}
-textarea{min-height:110px;resize:vertical}
-.evrow{display:flex;gap:10px 14px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px 14px;border:1.5px solid #e0e0d2;border-radius:14px;background:#fffefb}.evrow small{display:block;color:#5d7268;font-size:14px;margin-top:2px}.att{display:flex;align-items:center;gap:6px}.att em{font-style:normal;font-weight:700;font-size:13px;margin-right:2px}.evgrid .att label{margin:0;padding:0;border:0;border-radius:0;background:none;display:inline-block;cursor:pointer}.att input{position:absolute;opacity:0;pointer-events:none}.att span{display:inline-block;padding:3px 13px;border-radius:99px;border:1.5px solid #b9c4b2;background:#fff;font-weight:700;font-size:12.5px;color:#1f3a30;line-height:1.5}.att input[value=yes]:checked+span{background:#1f3a30;border-color:#1f3a30;color:#fff}.att input[value=no]:checked+span{background:#a65a43;border-color:#a65a43;color:#fff}.att input:focus-visible+span{outline:2px solid #b8892b}
-.choices{display:flex;gap:26px;flex-wrap:wrap}
-.choices label{display:flex;gap:8px;align-items:center;margin:0;cursor:pointer}
-.evgrid{display:grid;grid-template-columns:1fr;gap:10px}
-.evgrid label{display:flex;gap:12px;align-items:flex-start;margin:0;padding:12px 14px;border:1.5px solid #e0e0d2;border-radius:14px;cursor:pointer;background:#fffefb}
-.evgrid label small{display:block;color:#5d7268;font-size:14px;margin-top:2px}
-.evgrid input{margin-top:5px;accent-color:var(--deep)}
-.submit{margin-top:28px;width:100%;font:inherit;font-weight:700;letter-spacing:.12em;border:0;border-radius:99px;background:var(--deep);color:#fff;padding:17px;font-size:16px;cursor:pointer}
-.submit:disabled{opacity:.6;cursor:wait}
-.err{color:#a62626;font-size:15px;margin:16px 0 0;min-height:1em}
-.hide{display:none!important}
-.thanks h3{font-family:'Playfair Display',serif;font-size:30px;margin:0 0 10px}
-.thanks p{line-height:1.55;color:#3d5a4f}
-.cal{display:flex;flex-direction:column;gap:12px;margin-top:22px}
-.cal-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;border:1.5px solid #e0e0d2;border-radius:14px}
-.cal-row b{display:block}.cal-row span{font-size:14px;color:#5d7268}
-.cal-actions a{font-size:14px;font-weight:700;color:var(--deep);margin-left:14px;text-decoration:underline}
-@media (max-width:860px){
-.wrap{grid-template-columns:1fr;gap:28px}
-.grid2{grid-template-columns:1fr}
-.card{padding:24px}
-}
-@media (min-width:1000px){
-body{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:start}
-.hero{position:sticky;top:0;height:100vh;min-height:0}
-.invite{height:min(100vh - 32px,(44vw - 32px) * 1.4953)}
-.rsvp{padding:48px 44px 72px;min-height:100vh}
-.wrap{grid-template-columns:1fr;gap:26px;max-width:660px}
-h2{font-size:clamp(28px,2.8vw,40px);margin-bottom:14px}
-}
-@media (max-width:999px){
-.hero{min-height:0;padding:10px 8px 18px}
-.invite{height:auto;width:100%;max-width:560px}
-}
-.topnav{position:fixed;top:0;left:0;right:0;height:54px;z-index:60;display:flex;align-items:center;justify-content:center;gap:12px;background:#1f3a30;border-bottom:2px solid #c9a24a;box-shadow:0 2px 12px rgba(0,0,0,.25)}
-.topnav a{display:flex;align-items:center;gap:7px;height:36px;padding:0 16px 0 12px;border-radius:99px;color:#fff;border:1.5px solid rgba(201,162,74,.7);text-decoration:none;font:700 12.5px/1 'DM Sans',system-ui,sans-serif;letter-spacing:.1em}
-.topnav svg{width:18px;height:18px;stroke:#f3dfa6;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.topnav a:hover{background:#2f5546}
-html{scroll-padding-top:54px}
-body{padding-top:54px}
-@media (min-width:1000px){.hero{top:54px;height:calc(100vh - 54px)}.invite{height:min(100vh - 86px,(44vw - 32px) * 1.4953)}.rsvp{min-height:calc(100vh - 54px)}}
-.gift{margin:28px auto 0;max-width:560px;background:var(--card);border:1px solid #e6d6a8;border-radius:18px;padding:26px 22px;text-align:center}
-.gift h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;color:var(--deep);margin:0 0 6px}
-.gift p{margin:0 0 16px;color:#5d7268;font-size:14px;line-height:1.5}
-.gift select{width:100%;max-width:340px;padding:12px 14px;border:1px solid var(--gold);border-radius:99px;background:#fff;color:var(--deep);font:600 14px inherit;font-family:inherit;text-align:center;cursor:pointer}
-.gift .gbtn{display:inline-block;margin-top:16px;background:var(--deep);color:#fff;text-decoration:none;font-weight:700;letter-spacing:.12em;font-size:13px;padding:12px 28px;border-radius:99px;border:1px solid var(--gold)}
-.gift .gbtn:hover{background:#15302a}
-.cd{margin:18px 0 6px;text-align:center}
-.cd small{display:block;font-weight:700;letter-spacing:.16em;font-size:11px;color:var(--gold);margin-bottom:8px;text-transform:uppercase}
-.cd .row{display:flex;gap:8px}
-.cd .u{flex:1;background:var(--card);border:1px solid #e6d6a8;border-radius:14px;padding:10px 4px}
-.cd .u b{display:block;font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:var(--deep);font-weight:600}
-.cd .u span{font-size:10px;letter-spacing:.14em;color:#5d7268;text-transform:uppercase}
-.cd .done{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--deep);padding:10px 0}
-.invite .ganesha-top{position:absolute;left:50%;top:19%;height:5.6cqw;width:auto;transform:translateX(-50%);z-index:2;pointer-events:none}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Wedding Invitation</title>
+  <meta name="description" content="Join us as we celebrate our wedding — RSVP and share your wishes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
-<nav class="topnav" aria-label="Page"><a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" title="Home"><svg viewBox="0 0 24 24"><path d="M3.5 11.2 12 4l8.5 7.2M5.8 9.6V20h12.4V9.6M10 20v-5.6h4V20"/></svg>HOME</a><a href="#rsvp" onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});return false;" title="RSVP"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>RSVP</a></nav>
-<section class="hero" id="top">
-<div class="invite">
-<img class="ganesha-top" alt="Lord Ganesha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAABOBAMAAAB4ce0TAAAAGFBMVEWhdTihdTihdTihdTihdTihdTihdTihdTguNwtlAAAACHRSTlMAJEhtkbba/5xGsqgAAAVgSURBVHjavZXdUxNXGMafdxNaP2L2bDbUD1oSNqDWoiwGnNppwSTgMJ1pa0HuetXO9Lr/SP+C/gUVxo+ZXnT8IPg1VoEEFYsfBBYYMZVk9yxRSZXs6YU6bEiiXHVvMnvmt895n7znvA+wuYfhf3ikcPlrDSwY2xTGaDOYJxbUN4EFl8/Eyz6rjm2x/XPZ92KezzsO2H4X562K9ejCjjqT71GT+jOzozyQ5+9Ry43yr+zke2uz+7xHp3yr/J0YaZ7D/qGjjfZq8V2bktY4+iq3NqWZ/B1qnoGl6Q/vfnPFKbZ+ZNTuQlA71NweiaiJRe3wO9T23L19/K+GLalHDZcC0zXVWlpVuWBtPyu67ejlgVpqdPKFVUyvEpZezGPrl495DTVf+pluBxa7NEax/GjN2nyh/X8e9c76Iwv+x1uPjNSojY3QeFjO6AWLaFker6VWFPdzfY8GWFEKv/w2Gdw/V6sLgtTYrUkFFJW80ae1m7VmLy8OmnMY9zU6Z6phFGlH6bRIhvovpIHAmYCvWm3UG2fUsHPaHniUBLBaDD43qjjt1C0OqzlcMt/sRZOBSqxe51AU8JjIv1mxWG94Iyb1g5BJEQKYfWvmCKuw0CyodGkOwf4VcACKBbBkl7HBgjQAZzgLvPDuyhSLUjS6fxqe3PRGp511f1/nAPA0NoGiYk7sqOMvQ3yjhbCcer1WAgGmhTEdQq84lsPP30w+YXEOghS6A0EVmDP8dgY5AkDCHzAgPJWHvDT1xr0DQNw9KTnAfJW7MP56kFIaAJY9MQA2q+ipsloyAYBeX/bZeRMI1vGNY0gJSMcA4G3ZBGCnvrELTjBWug0AAoy//q02ez3fpe4wHQAoXBFC65h6MeVzNACgyoBa3zQ0hgXhZbxMjXEEwrPcpSYDlkUxAKS6qxrsOOnelCssZHc3Awh4wm8Nh7lH5K6ccDeLqZaKFR1QeByg3jAAmYOlHhZcGM1lDA2ZdiBE9TEQNQEk87UxA6NsHVtsp/Y2Z0SB1JSfaElocwAkGSIJ8rt72jtILC8RVN/wxbMd8dJhBtVE588xzwm+juUM/x2kSVD8ktS+bKH7HEOT6dWp01HdzRqSSdgwOht/36vKthyYAek3Q79FC13cfbOEHRScgs0lHDrtFzQDeP2TQErZIze5z1sTh+JMcgtwVph/FIjn1AQT5tW824InBADjABbjHcoMh7ftygAxQDknuzDBGRGcUWC85djMGSBRUs5fLPQkfLbhrs3DiaBYAZSG5DmgXj9vGZ3tJmlD3IV5u9Mkt15uksKGaQJSfy6NlrZTHPU//eq6CyIrNN+Obc99+9IApJ7wH96tfcNSMbzk1Enu4LPmI6d3GGlvjEHtaR9b6IpetKnbE5iIuaelnC1ouTRZUU2LRMPj6T0PO5MBZ9unav6AG8tiNb5zMvr8gaYoL649EP/8cMk+IO5/UKRC+ewVa3scu7V+xJq9VpBLfcV7bW3Wk2z2x9vlKcPGqMeZWPFPTAQb50pqfqVrOE0MKblcbReyDYed+1vVRN3NQd/Ux7lDSRz/InN/f3kYaYZ4su2z6IGd926wha9v7ci13fAezB2545THx2JoxbygwLIAz/b5sAECjRR+cYzy2vIJAcWylI7vYZ0wZMOSmMMcaWNQOlNxWMS4xSEk8QkJ6I7EKvN0IjKYcAp+kVQk2PlAiUfE7IqoyFNnG2mZ7Im/98afeX3XtSXv7lC21TdZkc4jpVMGYCHdfbVB4RinlsFjycp0FiX9XzW/On9wLZjcR0+EvRt3J9dH4/pffFw3U6TJxqvLAgAUWKiCgXqbGGDOJMsWq4R4RGNmxihb+g9oOShG/7/DEwAAAABJRU5ErkJggg==">
-<div class="copy">
-<p class="kicker">Together with their families</p>
-<h1 class="names"><b>Vijay Maddineni</b><span>&amp;</span><b>Navya Bharathi Bikki</b></h1>
-<p class="kicker">cordially invite you to join the occasion<br>of wedding celebrations</p>
-<ul class="events" id="inviteEvents"></ul>
-<p class="kicker" style="font-size:2.3cqw">Dallas, Texas · December 2026</p>
-</div>
-<div class="rsvp-by"><a class="btn" href="#rsvp" onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});return false;">RSVP</a></div>
-</div>
-</section>
-<section class="rsvp" id="rsvp">
-<div class="wrap">
-<div>
-<p class="eyebrow">RSVP</p>
-<h2>Let's Celebrate Together</h2>
-<p class="lede">We are so excited to have you be part of our events and make beautiful memories together.</p>
-<div class="cd" id="cd" aria-live="off"><small>Counting down to the wedding</small><div class="row"><div class="u"><b id="cdD">--</b><span>Days</span></div><div class="u"><b id="cdH">--</b><span>Hours</span></div><div class="u"><b id="cdM">--</b><span>Mins</span></div><div class="u"><b id="cdS">--</b><span>Secs</span></div></div></div>
-<script>(function(){var T=Date.UTC(2026,11,23,16,21,0);function p(n){return n<10?'0'+n:''+n}function t(){var d=T-Date.now();var c=document.getElementById('cd');if(!c)return;if(d<=0){c.innerHTML='<div class="done">Today is the day! 💛</div>';return}var s=Math.floor(d/1000);document.getElementById('cdD').textContent=Math.floor(s/86400);document.getElementById('cdH').textContent=p(Math.floor(s%86400/3600));document.getElementById('cdM').textContent=p(Math.floor(s%3600/60));document.getElementById('cdS').textContent=p(s%60)}t();setInterval(t,1000)})()</script>
-<div class="venues" id="venues"></div>
-</div>
-<div class="card">
-<form id="form" novalidate>
-<div class="grid2">
-<div><label for="name">Guest / Family Name *</label><input id="name" type="text" autocomplete="name"></div>
-<div><label for="email">Email Address *</label><input id="email" type="email" autocomplete="email"></div>
-<div><label for="phone">Phone Number *</label><input id="phone" type="tel" autocomplete="tel"></div>
-<div><label for="guests">Number of Guests Attending *</label><input id="guests" type="number" min="1" max="20" value="1"></div>
-</div>
-        <div id="eventsBlock">
-<p class="q">Will you be joining us for each celebration? *</p>
-<div class="evgrid" id="eventChecks"></div>
-</div>
-<p class="q" style="margin-top:26px">Leave a Note for Vijay &amp; Navya</p>
-<textarea id="note"></textarea>
-<button class="submit" id="submitBtn" type="submit">SEND RSVP</button>
-<p class="err" id="err" role="alert"></p>
-</form>
-<div class="thanks hide" id="thanks">
-<h3 id="thanksTitle">Thank you!</h3>
-<p id="thanksText"></p>
-<div class="cal" id="calList"></div>
-</div>
-<div class="gift" id="gifts">
-<h3>Find the perfect gift</h3>
-<p>Your presence is the greatest gift. If you would like to give something, a gift card is always welcome.</p>
-<select id="giftSel" aria-label="Choose a gift card">
-<option value="https://www.amazon.com/gift-cards">Amazon Gift Card</option>
-<option value="https://www.giftcards.com/">Visa / Other Gift Cards</option>
-</select><br>
-<a class="gbtn" id="giftBtn" href="https://www.amazon.com/gift-cards" target="_blank" rel="noopener">BUY GIFT CARD</a>
-<p style="margin:18px 0 0;font-size:13px">Sending an eGift card? Please send it to<br><a href="mailto:vijay.maddineni17@gmail.com" style="color:var(--deep);font-weight:700">vijay.maddineni17@gmail.com</a></p>
-<script>document.getElementById('giftSel').addEventListener('change',function(){document.getElementById('giftBtn').href=this.value})</script>
-</div>
-</div>
-</div>
-</section>
-<script>
-const SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';   // see Code.gs setup steps
-const TZ = 'America/Chicago';
-const UTC_OFFSET_HOURS = 6;  // CST in December (add 6h to get UTC)
-// Keep this list in sync with EVENTS in Code.gs
-const EVENTS = [
-{ id:'pelli',   title:'Pelli Koduku & Pelli Kuthuru', short:'Pelli Koduku & Pelli Kuthuru',
-date:'2026-12-20', start:'15:00', end:'19:00', when:'Sun, Dec 20 · 3:00 PM & 5:00 PM',
-venue:'McKinney, TX', desc:'Pelli Koduku (3 PM) and Pelli Kuthuru (5 PM).' },
-{ id:'mehendi', title:'Mehendi', short:'Mehendi',
-date:'2026-12-21', start:'16:00', end:'20:00', when:'Mon, Dec 21 · 4:00 PM',
-venue:'5931 County Rd 471, McKinney, TX 75071', desc:'Mehendi celebration.' },
-{ id:'haldi',   title:'Haldi', short:'Haldi',
-date:'2026-12-22', start:'10:00', end:'13:00', when:'Tue, Dec 22 · 10:00 AM',
-venue:'5931 County Rd 471, McKinney, TX 75071', desc:'Haldi celebration.' },
-{ id:'wedding', title:'Wedding — Vijay & Navya', short:'Wedding',
-date:'2026-12-23', start:'10:00', end:'14:00', when:'Wed, Dec 23 · Muhurtham 10:21 AM',
-venue:'4253 County Rd 412, McKinney, TX 75071', desc:'Wedding ceremony. Muhurtham at 10:21 AM, followed by lunch.' },
-];
-const $ = s => document.querySelector(s);
-const mapUrl = e => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(e.venue);
-// invitation list on page 1
-const IC = {
-cal:'<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17.2h.01M12 17.2h.01"/></svg>',
-clk:'<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M12 6.8V12l3.4 2.2"/></svg>',
-pin:'<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.8-6.1-6.8-11.2a6.8 6.8 0 0 1 13.6 0C18.8 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.4"/></svg>'};
-$('#inviteEvents').innerHTML = EVENTS.map(e => {
-const p = e.when.split(' \u00b7 '), loc = e.venue.includes('County Rd') ? e.venue.split(',')[0] : e.venue;
-return `<li><p class="ev-name">${e.short}</p><div class="ev-grid"><div class="c">${IC.cal}<div><b>Date</b><span>${p[0]}</span></div></div><div class="c">${IC.clk}<div><b>Time</b><span>${p[1]}</span></div></div><a class="c" href="${mapUrl(e)}" target="_blank" rel="noopener">${IC.pin}<div><b>Location</b><span>${loc}</span></div></a></div></li>`;
-}).join('');
-// event checkboxes on page 2
-$('#eventChecks').innerHTML = EVENTS.map(e =>
-`<div class="evrow"><div><b>${e.short}</b><small>${e.when} &middot; <a href="${mapUrl(e)}" target="_blank" rel="noopener">\uD83D\uDCCD Map</a></small></div><div class="att"><em>Attending</em><label><input type="radio" name="att_${e.id}" value="yes"><span>Yes</span></label><label><input type="radio" name="att_${e.id}" value="no"><span>No</span></label></div></div>`
-).join('');
-// venue list beside the RSVP form
-(function(){
-const seen = {}, rows = [];
-EVENTS.forEach(e => { if (seen[e.venue]) { seen[e.venue].names.push(e.short); } else { seen[e.venue] = {names:[e.short], venue:e.venue}; rows.push(seen[e.venue]); } });
-$('#venues').innerHTML = '<h4>Venues</h4>' + rows.map(r =>
-`<a href="${'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.venue)}" target="_blank" rel="noopener"><b>\uD83D\uDCCD ${r.names.join(', ')}</b><span>${r.venue}</span></a>`).join('');
-})();
-const pad = n => String(n).padStart(2,'0');
-function utcStamp(date, time){
-const [y,m,d] = date.split('-').map(Number), [hh,mm] = time.split(':').map(Number);
-const dt = new Date(Date.UTC(y, m-1, d, hh + UTC_OFFSET_HOURS, mm));
-return `${dt.getUTCFullYear()}${pad(dt.getUTCMonth()+1)}${pad(dt.getUTCDate())}T${pad(dt.getUTCHours())}${pad(dt.getUTCMinutes())}00Z`;
-}
-function googleLink(e){
-const q = new URLSearchParams({action:'TEMPLATE', text:e.title, dates:`${utcStamp(e.date,e.start)}/${utcStamp(e.date,e.end)}`, details:e.desc, location:e.venue, ctz:TZ});
-return 'https://calendar.google.com/calendar/render?' + q;
-}
-function icsFor(list){
-const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Vijay and Navya Wedding//EN','CALSCALE:GREGORIAN'];
-list.forEach(e => lines.push('BEGIN:VEVENT',`UID:${e.id}-2026@vijay-navya-wedding`,`DTSTAMP:${utcStamp('2026-11-01','00:00')}`,
-`DTSTART:${utcStamp(e.date,e.start)}`,`DTEND:${utcStamp(e.date,e.end)}`,`SUMMARY:${e.title}`,
-`LOCATION:${e.venue.replace(/,/g,'\\,')}`,`DESCRIPTION:${e.desc}`,
-'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Tomorrow: '+e.title,'END:VALARM','END:VEVENT'));
-lines.push('END:VCALENDAR');
-return lines.join('\r\n');
-}
-function icsHref(list){ return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsFor(list)); }
-$('#form').addEventListener('submit', async ev => {
-ev.preventDefault();
-const err = $('#err'); err.textContent = '';
-const v = {
-name: $('#name').value.trim(), email: $('#email').value.trim(), phone: $('#phone').value.trim(),
-guests: parseInt($('#guests').value,10) || 0, note: $('#note').value.trim(),
-responses: {},
-};
-EVENTS.forEach(e => { v.responses[e.id] = (document.querySelector('input[name=att_'+e.id+']:checked')||{}).value || ''; });
-v.events = EVENTS.filter(e => v.responses[e.id]==='yes').map(e => e.id);
-v.attending = v.events.length ? 'yes' : 'no';
+<body class="locked">
 
-if (!v.name || !v.phone || !v.email || v.guests < 1){
-err.textContent = 'Please complete the required details before sending your RSVP.'; return;
-}
-if (!/^\S+@\S+\.\S+$/.test(v.email)){ err.textContent = 'Please enter a valid email so we can send your calendar invites.'; return; }
-if (EVENTS.some(e => !v.responses[e.id])){ err.textContent = 'Please choose Yes or No for each celebration.'; return; }
-const hosted = typeof google !== 'undefined' && google.script && google.script.run;
-if (!hosted && SCRIPT_URL.startsWith('PASTE_')){ err.textContent = 'RSVP backend is not connected yet.'; return; }
-const btn = $('#submitBtn'); btn.disabled = true; btn.textContent = 'SENDING…';
-try{
-if (hosted){
-// Running on Google Apps Script: call the server directly
-await new Promise((ok, fail) => google.script.run.withSuccessHandler(ok).withFailureHandler(fail).submitRsvp(v));
-} else {
-await fetch(SCRIPT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(v)});
-}
-}catch(x){
-err.textContent = 'Something went wrong sending your RSVP. Please try again.'; btn.disabled = false; btn.textContent = 'SEND RSVP'; return;
-}
-showThanks(v);
-});
-function showThanks(v){
-$('#form').classList.add('hide'); $('#thanks').classList.remove('hide');
-if (v.attending === 'no'){
-$('#thanksTitle').textContent = 'We will miss you!';
-$('#thanksText').textContent = 'Thank you for letting us know, ' + v.name + '. You will be in our hearts on the big day.';
-return;
-}
-const chosen = EVENTS.filter(e => v.events.includes(e.id));
-$('#thanksTitle').textContent = 'Thank you, ' + v.name + '!';
-$('#thanksText').textContent = 'Your RSVP is in. Calendar invites are on their way to ' + v.email + ' and will land on your calendar, and we will send you friendly reminders as the day gets closer. You can also add them right now:';
-$('#calList').innerHTML =
-`<a class="btn" style="text-align:center;font-size:15px;padding:14px" download="Vijay-Navya-Wedding.ics" href="${icsHref(chosen)}">ADD ALL TO CALENDAR (.ics)</a>` +
-chosen.map(e => `<div class="cal-row"><div><b>${e.short}</b><span>${e.when}</span></div>
-<div class="cal-actions"><a target="_blank" rel="noopener" href="${mapUrl(e)}">\uD83D\uDCCD Map</a><a target="_blank" rel="noopener" href="${googleLink(e)}">Google</a>
-<a download="${e.id}.ics" href="${icsHref([e])}">Apple / Outlook</a></div></div>`).join('');
-}
-</script>
+  <!-- ============ COVER ============ -->
+  <div id="cover">
+    <div class="cover-inner">
+      <div class="cover-blessing" id="cover-blessing"></div>
+      <div class="cover-frame">
+        <div class="cover-eyebrow">The Wedding Of</div>
+        <div class="cover-names">
+          <span id="cover-groom">Vijay</span>
+          <span class="cover-amp">&amp;</span>
+          <span id="cover-bride">Navya</span>
+        </div>
+        <div class="cover-date" id="cover-date"></div>
+        <div class="cover-venue" id="cover-venue"></div>
+        <div class="divider">✦</div>
+        <div class="cover-dear">Dear,</div>
+        <div class="cover-guest" id="cover-guest">Guest</div>
+        <button class="btn btn-primary" id="open-invite">✉&nbsp; Open Invitation</button>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <div class="wrap">
+      <div class="brand" id="nav-brand">V <span class="amp">&amp;</span> N</div>
+      <div class="links">
+        <a href="#couple">Couple</a>
+        <a href="#journey">Events</a>
+        <a href="#rsvp">RSVP</a>
+        <a href="#wishes">Wishes</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow" id="hero-eyebrow">Together with their families</div>
+      <h1><span id="hero-groom">Vijay</span> <span class="amp">&amp;</span> <span id="hero-bride">Navya</span></h1>
+      <div class="dateline" id="hero-date"></div>
+      <div class="tagline" id="hero-tagline"></div>
+      <div class="divider">✦</div>
+      <div class="countdown" id="countdown">
+        <div class="count-box"><b id="cd-days">–</b><span>Days</span></div>
+        <div class="count-box"><b id="cd-hours">–</b><span>Hours</span></div>
+        <div class="count-box"><b id="cd-mins">–</b><span>Minutes</span></div>
+        <div class="count-box"><b id="cd-secs">–</b><span>Seconds</span></div>
+      </div>
+      <div class="btn-row">
+        <a href="#rsvp" class="btn btn-primary">RSVP Now</a>
+        <a href="#journey" class="btn btn-ghost">View Events</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ THE COUPLE ============ -->
+  <section id="couple">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>The Couple</h2>
+        <p id="couple-tagline"></p>
+      </div>
+      <div class="parents">
+        <div class="couple-card reveal">
+          <div class="couple-photo" id="groom-photo"><span>V</span></div>
+          <div class="role">The Groom</div>
+          <h3 id="groom-full"></h3>
+          <p id="groom-parents"></p>
+        </div>
+        <div class="couple-card reveal">
+          <div class="couple-photo" id="bride-photo"><span>N</span></div>
+          <div class="role">The Bride</div>
+          <h3 id="bride-full"></h3>
+          <p id="bride-parents"></p>
+        </div>
+      </div>
+      <div class="story reveal" id="story-body" style="margin-top:34px"></div>
+    </div>
+  </section>
+
+  <!-- ============ WEDDING JOURNEY ============ -->
+  <section id="journey" class="alt">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>The Wedding Journey</h2>
+        <p>Walk with us, function to function</p>
+      </div>
+      <div class="journey" id="journey-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ VIDEO ============ -->
+  <section id="video" class="alt" style="display:none">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Watch</h2>
+        <p>Our invitation film</p>
+      </div>
+      <div class="video-wrap reveal" id="video-wrap"></div>
+    </div>
+  </section>
+
+  <!-- ============ RSVP ============ -->
+  <section id="rsvp" class="alt">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Bless Us With Your Presence</h2>
+        <p>Let us know if you can join us, so we may keep a place for you</p>
+      </div>
+      <form id="rsvp-form" class="card reveal" novalidate>
+        <div class="field">
+          <label for="r-name">Your full name *</label>
+          <input type="text" id="r-name" name="name" required autocomplete="name" placeholder="e.g. Priya Nair" />
+        </div>
+        <div class="field">
+          <label for="r-phone">Phone number *</label>
+          <input type="tel" id="r-phone" name="phone" required autocomplete="tel" placeholder="+91 …" />
+        </div>
+        <div class="field">
+          <label>Wedding ceremony?</label>
+          <div class="radio-row">
+            <label class="radio-pill"><input type="radio" name="ceremony" value="yes" checked /><span>Joyfully attending</span></label>
+            <label class="radio-pill"><input type="radio" name="ceremony" value="no" /><span>Will miss it</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Reception?</label>
+          <div class="radio-row">
+            <label class="radio-pill"><input type="radio" name="reception" value="yes" checked /><span>Joyfully attending</span></label>
+            <label class="radio-pill"><input type="radio" name="reception" value="no" /><span>Will miss it</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="r-headcount">Total guests (including you)</label>
+          <input type="number" id="r-headcount" name="headcount" min="1" max="20" value="1" />
+        </div>
+        <div class="field">
+          <label>Meal preference</label>
+          <div class="radio-row">
+            <label class="radio-pill"><input type="radio" name="meal" value="veg" checked /><span>Veg</span></label>
+            <label class="radio-pill"><input type="radio" name="meal" value="non-veg" /><span>Non-veg</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="r-notes">Dietary notes / message <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
+          <textarea id="r-notes" name="notes" placeholder="Allergies, or a note for the couple…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="rsvp-submit" style="width:100%">Send RSVP</button>
+        <div class="form-note">Your response is saved instantly and shared only with the families.</div>
+        <div class="form-ok" id="rsvp-ok">
+          <h3>Thank you! ♡</h3>
+          <p>Your RSVP has been recorded.<br />We can't wait to celebrate with you.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ WISHES ============ -->
+  <section id="wishes">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Wall of Wishes</h2>
+        <p>Leave a blessing for the couple</p>
+      </div>
+      <form id="wish-form" class="card reveal" style="margin-bottom:26px" novalidate>
+        <div class="field">
+          <label for="w-name">Your name *</label>
+          <input type="text" id="w-name" required placeholder="e.g. Priya Nair" />
+        </div>
+        <div class="field">
+          <label for="w-msg">Your wish *</label>
+          <textarea id="w-msg" required placeholder="Write your blessing…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-ghost" id="wish-submit" style="width:100%">Share Wish</button>
+        <div class="form-note">Wishes appear here after a quick review by the family.</div>
+        <div class="form-ok" id="wish-ok">
+          <h3>Thank you! ♡</h3>
+          <p>Your wish was received and will appear after review.</p>
+        </div>
+      </form>
+      <div id="wishes-list"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="names"><span id="foot-groom">Vijay</span> <span style="color:var(--gold-soft)">&amp;</span> <span id="foot-bride">Navya</span></div>
+      <div class="blessing" id="foot-blessing"></div>
+      <div id="foot-contact" style="font-size:0.9rem; opacity:0.85"></div>
+    </div>
+  </footer>
+
+  <!-- Floating sound toggle (appears only when WEDDING.musicUrl is set) -->
+  <button id="sound-toggle" class="sound-btn" style="display:none" aria-label="Toggle music">🔇</button>
+
+  <script src="js/content.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
