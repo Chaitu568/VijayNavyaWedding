@@ -119,12 +119,7 @@ textarea{min-height:110px;resize:vertical}
 <div><label for="phone">Phone Number *</label><input id="phone" type="tel" autocomplete="tel"></div>
 <div><label for="guests">Number of Guests Attending *</label><input id="guests" type="number" min="1" max="20" value="1"></div>
 </div>
-<p class="q">Will you be attending the wedding celebrations? *</p>
-<div class="choices">
-<label><input type="radio" name="attending" value="yes"> Yes, absolutely</label>
-<label><input type="radio" name="attending" value="no"> Unfortunately, we won't be able to attend</label>
-</div>
-<div id="eventsBlock">
+        <div id="eventsBlock">
 <p class="q">Which celebrations will you be joining?</p>
 <div class="evgrid" id="eventChecks"></div>
 </div>
@@ -177,9 +172,6 @@ EVENTS.forEach(e => { if (seen[e.venue]) { seen[e.venue].names.push(e.short); } 
 $('#venues').innerHTML = '<h4>Venues</h4>' + rows.map(r =>
 `<a href="${'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(r.venue)}" target="_blank" rel="noopener"><b>\uD83D\uDCCD ${r.names.join(', ')}</b><span>${r.venue}</span></a>`).join('');
 })();
-document.querySelectorAll('input[name=attending]').forEach(r => r.addEventListener('change', () => {
-$('#eventsBlock').classList.toggle('hide', r.value === 'no' && r.checked);
-}));
 const pad = n => String(n).padStart(2,'0');
 function utcStamp(date, time){
 const [y,m,d] = date.split('-').map(Number), [hh,mm] = time.split(':').map(Number);
@@ -206,15 +198,15 @@ const err = $('#err'); err.textContent = '';
 const v = {
 name: $('#name').value.trim(), email: $('#email').value.trim(), phone: $('#phone').value.trim(),
 guests: parseInt($('#guests').value,10) || 0, note: $('#note').value.trim(),
-attending: (document.querySelector('input[name=attending]:checked')||{}).value || '',
+attending: 'yes',
 events: [...document.querySelectorAll('input[name=ev]:checked')].map(c => c.value),
 };
-if (v.attending === 'no') v.events = [];
-if (!v.name || !v.phone || !v.email || !v.attending || v.guests < 1){
+
+if (!v.name || !v.phone || !v.email || v.guests < 1){
 err.textContent = 'Please complete the required details before sending your RSVP.'; return;
 }
 if (!/^\S+@\S+\.\S+$/.test(v.email)){ err.textContent = 'Please enter a valid email so we can send your calendar invites.'; return; }
-if (v.attending === 'yes' && !v.events.length){ err.textContent = 'Please choose at least one celebration.'; return; }
+if (!v.events.length){ err.textContent = 'Please choose at least one celebration.'; return; }
 const hosted = typeof google !== 'undefined' && google.script && google.script.run;
 if (!hosted && SCRIPT_URL.startsWith('PASTE_')){ err.textContent = 'RSVP backend is not connected yet.'; return; }
 const btn = $('#submitBtn'); btn.disabled = true; btn.textContent = 'SENDING…';
