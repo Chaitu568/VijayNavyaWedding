@@ -88,9 +88,10 @@ const WEDDING = {
   couplePhotos: { groom: "", bride: "" },
 
   // Background music for the floating sound button.
-  // Direct MP3 URL (e.g. "music.mp3" beside index.html). Empty hides the button.
+  // Ships with the site as assets/music.mp3 — to change the song,
+  // just replace that file (keep the same name). Empty hides the button.
   // Music starts when the guest taps "Open Invitation".
-  musicUrl: "",
+  musicUrl: "assets/music.mp3",
 
   // YouTube video (invite film / teaser). Full watch URL when ready.
   // Empty hides the video section until then.

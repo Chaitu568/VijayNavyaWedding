@@ -56,6 +56,7 @@
     // Journey
     setHTML("journey-list", WEDDING.events.map(function (e) {
       return '<div class="journey-item reveal"><div class="journey-card">' +
+        '<div class="event-icon">' + iconFor(e.id) + "</div>" +
         "<h3>" + esc(e.title) + "</h3>" +
         '<div class="event-meta"><b>' + esc(e.date) + "</b> · " + esc(e.time) + "</div>" +
         '<div class="event-meta">' + esc(e.venue) + "<br/>" + esc(e.address) + "</div>" +
@@ -74,6 +75,18 @@
     initSound();
     observeReveals();
     startCountdown();
+  }
+
+  /* ---------- Event icons (original line-art, stroke style) ---------- */
+  function iconFor(id) {
+    var P = {
+      mehendi: '<circle cx="24" cy="13" r="4.6"/><circle cx="34.5" cy="18.5" r="4.6"/><circle cx="34.5" cy="29.5" r="4.6"/><circle cx="24" cy="35" r="4.6"/><circle cx="13.5" cy="29.5" r="4.6"/><circle cx="13.5" cy="18.5" r="4.6"/><circle cx="24" cy="24" r="3.4" fill="currentColor" stroke="none"/>',
+      haldi: '<circle cx="24" cy="24" r="7.5"/><path d="M24 8v5M24 35v5M8 24h5M35 24h5M12.7 12.7l3.5 3.5M31.8 31.8l3.5 3.5M35.3 12.7l-3.5 3.5M16.2 31.8l-3.5 3.5"/>',
+      ceremony: '<path d="M24 6v4"/><path d="M24 10a9.5 9.5 0 0 1 9.5 9.5c0 5.2 2 7.3 3.2 8.5H11.3c1.2-1.2 3.2-3.3 3.2-8.5A9.5 9.5 0 0 1 24 10z"/><circle cx="24" cy="33.5" r="2.6"/><path d="M18 42h12"/>',
+      reception: '<path d="M24 5l4.2 14.8L43 24l-14.8 4.2L24 43l-4.2-14.8L5 24l14.8-4.2z"/>'
+    };
+    var inner = P[id] || '<path d="M24 36c-9-5.5-11-14-4.5-21C24 18 28 18 28.5 15 39 22 33 30.5 24 36z"/>';
+    return '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + "</svg>";
   }
 
   function setPhoto(id, src, name) {
