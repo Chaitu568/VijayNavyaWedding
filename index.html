@@ -124,6 +124,13 @@ body{padding-top:54px}
 .gift select{width:100%;max-width:340px;padding:12px 14px;border:1px solid var(--gold);border-radius:99px;background:#fff;color:var(--deep);font:600 14px inherit;font-family:inherit;text-align:center;cursor:pointer}
 .gift .gbtn{display:inline-block;margin-top:16px;background:var(--deep);color:#fff;text-decoration:none;font-weight:700;letter-spacing:.12em;font-size:13px;padding:12px 28px;border-radius:99px;border:1px solid var(--gold)}
 .gift .gbtn:hover{background:#15302a}
+.cd{margin:18px 0 6px;text-align:center}
+.cd small{display:block;font-weight:700;letter-spacing:.16em;font-size:11px;color:var(--gold);margin-bottom:8px;text-transform:uppercase}
+.cd .row{display:flex;gap:8px}
+.cd .u{flex:1;background:var(--card);border:1px solid #e6d6a8;border-radius:14px;padding:10px 4px}
+.cd .u b{display:block;font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:var(--deep);font-weight:600}
+.cd .u span{font-size:10px;letter-spacing:.14em;color:#5d7268;text-transform:uppercase}
+.cd .done{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--deep);padding:10px 0}
 </style>
 </head>
 <body>
@@ -146,6 +153,8 @@ body{padding-top:54px}
 <p class="eyebrow">RSVP</p>
 <h2>Let's Celebrate Together</h2>
 <p class="lede">We are so excited to have you be part of our events and make beautiful memories together.</p>
+<div class="cd" id="cd" aria-live="off"><small>Counting down to the wedding</small><div class="row"><div class="u"><b id="cdD">--</b><span>Days</span></div><div class="u"><b id="cdH">--</b><span>Hours</span></div><div class="u"><b id="cdM">--</b><span>Mins</span></div><div class="u"><b id="cdS">--</b><span>Secs</span></div></div></div>
+<script>(function(){var T=Date.UTC(2026,11,23,16,21,0);function p(n){return n<10?'0'+n:''+n}function t(){var d=T-Date.now();var c=document.getElementById('cd');if(!c)return;if(d<=0){c.innerHTML='<div class="done">Today is the day! 💛</div>';return}var s=Math.floor(d/1000);document.getElementById('cdD').textContent=Math.floor(s/86400);document.getElementById('cdH').textContent=p(Math.floor(s%86400/3600));document.getElementById('cdM').textContent=p(Math.floor(s%3600/60));document.getElementById('cdS').textContent=p(s%60)}t();setInterval(t,1000)})()</script>
 <div class="venues" id="venues"></div>
 </div>
 <div class="card">
