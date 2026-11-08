@@ -68,6 +68,7 @@ border:1.5px solid #cfd3c8;border-radius:14px;padding:15px 16px;
 }
 input:focus,textarea:focus{outline:2px solid var(--green);border-color:var(--green)}
 textarea{min-height:110px;resize:vertical}
+.yn{display:flex;gap:14px}.yn label{flex:1;margin:0;cursor:pointer}.yn input{position:absolute;opacity:0;pointer-events:none}.yn span{display:block;text-align:center;padding:14px 10px;border:2px solid #c9d3c4;border-radius:12px;background:#fff;font-weight:700;color:#1f3a30;transition:.15s}.yn input:checked+span{background:#1f3a30;color:#fff;border-color:#1f3a30}.yn input:focus-visible+span{outline:3px solid #b8892b}
 .choices{display:flex;gap:26px;flex-wrap:wrap}
 .choices label{display:flex;gap:8px;align-items:center;margin:0;cursor:pointer}
 .evgrid{display:grid;grid-template-columns:1fr;gap:10px}
@@ -123,6 +124,8 @@ textarea{min-height:110px;resize:vertical}
 <p class="q">Which celebrations will you be joining?</p>
 <div class="evgrid" id="eventChecks"></div>
 </div>
+<p class="q" style="margin-top:26px">Attending? *</p>
+<div class="yn"><label><input type="radio" name="attending" value="yes"><span>Yes</span></label><label><input type="radio" name="attending" value="no"><span>No</span></label></div>
 <p class="q" style="margin-top:26px">Leave a Note for Vijay &amp; Navya</p>
 <textarea id="note"></textarea>
 <button class="submit" id="submitBtn" type="submit">SEND RSVP</button>
@@ -198,15 +201,16 @@ const err = $('#err'); err.textContent = '';
 const v = {
 name: $('#name').value.trim(), email: $('#email').value.trim(), phone: $('#phone').value.trim(),
 guests: parseInt($('#guests').value,10) || 0, note: $('#note').value.trim(),
-attending: 'yes',
+attending: (document.querySelector('input[name=attending]:checked')||{}).value || '',
 events: [...document.querySelectorAll('input[name=ev]:checked')].map(c => c.value),
 };
 
-if (!v.name || !v.phone || !v.email || v.guests < 1){
+if (v.attending === 'no') v.events = [];
+if (!v.name || !v.phone || !v.email || !v.attending || v.guests < 1){
 err.textContent = 'Please complete the required details before sending your RSVP.'; return;
 }
 if (!/^\S+@\S+\.\S+$/.test(v.email)){ err.textContent = 'Please enter a valid email so we can send your calendar invites.'; return; }
-if (!v.events.length){ err.textContent = 'Please choose at least one celebration.'; return; }
+if (v.attending === 'yes' && !v.events.length){ err.textContent = 'Please choose at least one celebration.'; return; }
 const hosted = typeof google !== 'undefined' && google.script && google.script.run;
 if (!hosted && SCRIPT_URL.startsWith('PASTE_')){ err.textContent = 'RSVP backend is not connected yet.'; return; }
 const btn = $('#submitBtn'); btn.disabled = true; btn.textContent = 'SENDING…';
