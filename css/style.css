@@ -113,9 +113,9 @@ h1, h2, h3, .serif { font-family: "Playfair Display", "Cormorant Garamond", Geor
   transition: transform 0.85s cubic-bezier(0.6, 0.05, 0.3, 1);
 }
 .flap-ganesh {
-  position: absolute; top: 12px; left: 50%; z-index: 1;
+  position: absolute; top: 10px; left: 50%; z-index: 1;
   transform: translateX(-50%);
-  height: 56px; width: auto;
+  height: 64px; width: auto;
   backface-visibility: hidden; -webkit-backface-visibility: hidden;
 }
 .flap-face {
