@@ -81,14 +81,60 @@ h1, h2, h3, .serif { font-family: "Playfair Display", "Cormorant Garamond", Geor
 .cover-inner { text-align: center; max-width: 520px; width: 100%; position: relative; z-index: 1; }
 .cover-blessing { color: var(--gold-pale); letter-spacing: 1px; font-size: 1.05rem; margin-bottom: 18px; text-shadow: 0 1px 8px rgba(0,0,0,0.45); }
 .cover-frame {
+  position: relative; z-index: 2;
   border: 2px solid var(--gold);
   outline: 1px solid var(--gold-pale); outline-offset: 6px;
   border-radius: 8px;
   background:
     var(--mandala-soft) center -140px / 260px no-repeat,
     rgba(251, 244, 220, 0.97);
-  padding: 42px 26px 38px;
+  padding: 116px 26px 38px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  transition: transform 0.9s ease;
+}
+
+/* ---------- Envelope opening ---------- */
+.envelope { position: relative; perspective: 1100px; }
+.envelope::before {
+  content: ""; position: absolute; inset: 12px -12px -14px -12px; z-index: 0;
+  background: linear-gradient(160deg, #7d1830, var(--maroon-deep));
+  border: 2px solid var(--gold); border-radius: 10px;
+}
+.env-flap {
+  position: absolute; top: 0; left: 0; right: 0; height: 96px; z-index: 3;
+  transform-origin: top center; transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.6, 0.05, 0.3, 1);
+}
+.flap-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.flap-front {
+  background:
+    var(--mandala) center -118px / 190px no-repeat,
+    linear-gradient(180deg, #8a1c2e, #6d1220);
+}
+.flap-back {
+  transform: rotateX(180deg);
+  background: linear-gradient(0deg, #e9cf8f, #c9a24b);
+}
+#cover.opening .env-flap { transform: rotateX(180deg); }
+.flap-seal {
+  position: absolute; top: 68px; left: 50%; z-index: 4;
+  transform: translateX(-50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #f0d896, var(--gold) 55%, var(--gold-dark));
+  border: 1.5px solid #8a6a25; color: var(--maroon-deep);
+  font-family: "Great Vibes", cursive; font-size: 1.02rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+#cover.opening .flap-seal { transform: translateX(-50%) scale(1.35); opacity: 0; }
+#cover.opening .cover-frame { transform: translateY(-24px); transition-delay: 0.25s; }
+@media (prefers-reduced-motion: reduce) {
+  .env-flap, .cover-frame, .flap-seal { transition: none !important; }
 }
 .cover-eyebrow { letter-spacing: 4px; text-transform: uppercase; font-size: 0.78rem; color: var(--green); font-weight: 600; margin-bottom: 10px; }
 .cover-names { font-family: "Great Vibes", cursive; color: var(--maroon); line-height: 1.38; }
